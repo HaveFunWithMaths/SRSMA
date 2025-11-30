@@ -505,23 +505,37 @@
             color: var(--primary-color);
         }
 
-        /* Testimonials Section */
-        #testimonials {
-            padding: 4rem 0;
-            background-color: var(--section-bg);
+        /* Results Section */
+        .results-wrapper {
+            margin-bottom: 4rem;
             text-align: center;
         }
 
-        .results-wrapper {
-            margin-bottom: 4rem;
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
         }
 
         .results-img {
             border-radius: 10px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            margin: 0 auto 1rem;
-            max-width: 800px;
+            margin: 0 auto;
             width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Testimonials Section */
+        #testimonials {
+            padding: 4rem 0;
+            background-color: var(--section-bg);
+            text-align: center;
         }
 
         .caption {
@@ -622,6 +636,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            font-size: 1.2rem;
         }
 
         .info-column i {
@@ -1006,12 +1021,12 @@
             <div class="results-wrapper" data-aos="zoom-in">
                 <h3 class="subsection-title" data-aos="fade-up" style="margin-top: 0;">Within Few Months of being Taught
                 </h3>
-                <img src="assets/images/JEEMain2025Results.png" alt="JEE Main 2025 Results" class="results-img"
-                    loading="lazy">
-            </div>
-            <div class="results-wrapper" data-aos="zoom-in">
-                <img src="assets/images/IPE2025FirstYearResults.png" alt="IPE 2025 First Year Results"
-                    class="results-img" loading="lazy">
+                <div class="results-grid">
+                    <img src="assets/images/JEEMain2025Results.png" alt="JEE Main 2025 Results" class="results-img"
+                        loading="lazy">
+                    <img src="assets/images/IPE2025FirstYearResults.png" alt="IPE 2025 First Year Results"
+                        class="results-img" loading="lazy">
+                </div>
             </div>
         </div>
     </section>
@@ -1216,11 +1231,13 @@
         <div class="container footer-container">
             <div class="footer-column info-column">
                 <h3>Contact Us</h3>
-                <p><i class="fas fa-map-marker-alt"></i> Touch Stone Public School, Sun City, Bandlaguda Jagir,
+                <p><i class="fas fa-map-marker-alt"></i>Touch Stone Public School,
+                    Sun City,
+                    Bandlaguda Jagir,
                     Hyderabad</p>
-                <p><i class="fas fa-phone"></i> +91 84639 11854</p>
-                <p><i class="fas fa-envelope"></i> smartmindsacademy108@gmail.com</p>
-                <p><i class="fas fa-clock"></i> Mon-Sat, 9 AM - 7 PM</p>
+                <p><i class="fas fa-phone"></i>+91 84639 11854</p>
+                <p><i class="fas fa-envelope"></i>smartmindsacademy108@gmail.com</p>
+                <p><i class="fas fa-clock"></i>Mon-Sat, 9 AM - 7 PM</p>
             </div>
             <div class="footer-column map-column">
                 <h3>Find Us</h3>
@@ -1271,7 +1288,9 @@
                 if (section) {
                     const targetElement = document.getElementById(section);
                     if (targetElement) {
-                        targetElement.scrollIntoView({ behavior: 'auto' });
+                        targetElement.scrollIntoView({
+                            behavior: 'auto'
+                        });
                     }
                 }
                 nav.classList.remove('active');
