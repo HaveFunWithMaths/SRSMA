@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7WLZ80HJC0"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-7WLZ80HJC0');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Crash Course Resources - Access class notes and assignments for Maths, Physics, Chemistry, and Biology at SRSMA.">
+    <title>Crash Course Resources | SRSMA</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="assets/images/logowhite.jpg" type="image/jpeg">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-color: #0a192f;
+            --secondary-color: #ffc107;
+            --text-color: #333333;
+            --light-text: #ffffff;
+            --background-color: #ffffff;
+            --section-bg: #f4f4f4;
+            --font-heading: 'Montserrat', sans-serif;
+            --font-body: 'Open Sans', sans-serif;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-color: var(--background-color);
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: 0.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo img {
+            height: 80px;
+            background: white;
+            border-radius: 5px;
+            padding: 2px;
+        }
+
+        .logo-text {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--light-text);
+            line-height: 1.2;
+            max-width: 200px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--light-text);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .cta-button {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            padding: 0.6rem 1.5rem;
+            border-radius: 5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .cta-button:hover {
+            background-color: #e0a800;
+            transform: translateY(-2px);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--light-text);
+        }
+
+        /* Page Header */
+        .page-hero {
+            background: transparent;
+            color: var(--primary-color);
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .page-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0;
+        }
+
+        .page-hero h1 i {
+            color: var(--secondary-color);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 4rem 0;
+        }
+
+        .section:nth-child(even) {
+            background-color: var(--section-bg);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--secondary-color);
+            margin: 10px auto 0;
+        }
+
+        .section-title i {
+            margin-right: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        /* Subject Tabs */
+        .subject-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .subject-tab {
+            padding: 0.6rem 1.5rem;
+            border: 2px solid var(--primary-color);
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            background: transparent;
+            color: var(--primary-color);
+        }
+
+        .subject-tab:hover,
+        .subject-tab.active {
+            background: var(--primary-color);
+            color: var(--light-text);
+        }
+
+        .subject-tab i {
+            margin-right: 0.5rem;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Card Styles */
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid #eee;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #1e3a5f 100%);
+            color: var(--light-text);
+            padding: 1rem 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-date {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .card-date i {
+            color: var(--secondary-color);
+        }
+
+        .card-subject {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .card-body {
+            padding: 1.25rem;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .card-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--secondary-color);
+            color: var(--primary-color);
+            padding: 0.7rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            transition: var(--transition);
+            width: 100%;
+            justify-content: center;
+        }
+
+        .card-cta:hover {
+            background: #e0a800;
+            transform: translateY(-2px);
+        }
+
+        .card-cta i {
+            font-size: 1rem;
+        }
+
+        /* Skeleton Loading */
+        .skeleton-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #eee;
+        }
+
+        .skeleton-header {
+            background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            height: 60px;
+        }
+
+        .skeleton-body {
+            padding: 1.25rem;
+        }
+
+        .skeleton-line {
+            background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 4px;
+            margin-bottom: 0.75rem;
+        }
+
+        .skeleton-line.title {
+            height: 24px;
+            width: 80%;
+        }
+
+        .skeleton-line.button {
+            height: 44px;
+            width: 100%;
+            margin-bottom: 0;
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: 200% 0;
+            }
+
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #666;
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            color: #ddd;
+            margin-bottom: 1rem;
+        }
+
+        .empty-state p {
+            font-size: 1.1rem;
+        }
+
+        /* Error State */
+        .error-state {
+            text-align: center;
+            padding: 2rem;
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 10px;
+            color: #856404;
+        }
+
+        .error-state i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .footer-column h3 {
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .info-column p {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+        }
+
+        .info-column i {
+            width: 20px;
+            color: var(--secondary-color);
+        }
+
+        .map-wrapper {
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-icons a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover {
+            background: var(--secondary-color);
+            color: var(--primary-color);
+        }
+
+        /* Back to Top */
+        #back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+            opacity: 0;
+            visibility: hidden;
+            z-index: 999;
+        }
+
+        #back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #back-to-top:hover {
+            transform: translateY(-5px);
+            background-color: #e0a800;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--primary-color);
+                flex-direction: column;
+                padding: 1rem 0;
+                text-align: center;
+            }
+
+            nav.active {
+                display: flex;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .page-hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.75rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .logo-text {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                width: 95%;
+                padding: 0 10px;
+            }
+
+            .logo img {
+                height: 60px;
+            }
+
+            .logo-text {
+                font-size: 0.75rem;
+                max-width: 120px;
+            }
+
+            .page-hero {
+                padding: 2rem 0;
+            }
+
+            .page-hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .section {
+                padding: 3rem 0;
+            }
+
+            .subject-tab {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            #back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <div class="logo-container">
+                <a href="index.html" class="logo">
+                    <img src="assets/images/logowhite.jpg" alt="SRSMA Logo">
+                </a>
+                <div class="logo-text">Shri Ram Smart Minds Academy</div>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#courses">Courses</a></li>
+                    <li><a href="index.html#faculty">Faculty</a></li>
+                    <li><a href="index.html#contact">Contact Us</a></li>
+                </ul>
+                <a href="talk-to-us.html" class="cta-button">Talk to Us</a>
+            </nav>
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-hero">
+        <div class="container">
+            <h1><i class="fas fa-book-open"></i> Crash Course Resources</h1>
+        </div>
+    </section>
+
+    <!-- Class Notes Section -->
+    <section class="section" id="classes-section">
+        <div class="container">
+            <h2 class="section-title"><i class="fas fa-file-alt"></i> Class Notes</h2>
+            <div class="subject-tabs" id="class-tabs">
+                <button class="subject-tab active" data-subject="Maths"><i class="fas fa-calculator"></i> Maths</button>
+                <button class="subject-tab" data-subject="Physics"><i class="fas fa-atom"></i> Physics</button>
+                <button class="subject-tab" data-subject="Chemistry"><i class="fas fa-flask"></i> Chemistry</button>
+                <button class="subject-tab" data-subject="Biology"><i class="fas fa-dna"></i> Biology</button>
+            </div>
+            <div class="cards-grid" id="classes-grid">
+                <!-- Skeleton loading -->
+                <div class="skeleton-card">
+                    <div class="skeleton-header"></div>
+                    <div class="skeleton-body">
+                        <div class="skeleton-line title"></div>
+                        <div class="skeleton-line button"></div>
+                    </div>
+                </div>
+                <div class="skeleton-card">
+                    <div class="skeleton-header"></div>
+                    <div class="skeleton-body">
+                        <div class="skeleton-line title"></div>
+                        <div class="skeleton-line button"></div>
+                    </div>
+                </div>
+                <div class="skeleton-card">
+                    <div class="skeleton-header"></div>
+                    <div class="skeleton-body">
+                        <div class="skeleton-line title"></div>
+                        <div class="skeleton-line button"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Assignments Section -->
+    <section class="section" id="assignments-section">
+        <div class="container">
+            <h2 class="section-title"><i class="fas fa-tasks"></i> Assignments</h2>
+            <div class="subject-tabs" id="assignment-tabs">
+                <button class="subject-tab active" data-subject="Maths"><i class="fas fa-calculator"></i> Maths</button>
+                <button class="subject-tab" data-subject="Physics"><i class="fas fa-atom"></i> Physics</button>
+                <button class="subject-tab" data-subject="Chemistry"><i class="fas fa-flask"></i> Chemistry</button>
+                <button class="subject-tab" data-subject="Biology"><i class="fas fa-dna"></i> Biology</button>
+            </div>
+            <div class="cards-grid" id="assignments-grid">
+                <!-- Skeleton loading -->
+                <div class="skeleton-card">
+                    <div class="skeleton-header"></div>
+                    <div class="skeleton-body">
+                        <div class="skeleton-line title"></div>
+                        <div class="skeleton-line button"></div>
+                    </div>
+                </div>
+                <div class="skeleton-card">
+                    <div class="skeleton-header"></div>
+                    <div class="skeleton-body">
+                        <div class="skeleton-line title"></div>
+                        <div class="skeleton-line button"></div>
+                    </div>
+                </div>
+                <div class="skeleton-card">
+                    <div class="skeleton-header"></div>
+                    <div class="skeleton-body">
+                        <div class="skeleton-line title"></div>
+                        <div class="skeleton-line button"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container footer-container">
+            <div class="footer-column info-column">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i>Shri Ram Smart Minds Academy,
+                    2nd Floor Sankirtan Bhavan,
+                    Bandlaguda Jagir,
+                    Sun City,
+                    Hyderabad</p>
+                <p><i class="fas fa-phone"></i>+91 84639 11854</p>
+                <p><i class="fas fa-envelope"></i>smartmindsacademy108@gmail.com</p>
+                <p><i class="fas fa-clock"></i>Mon-Sat, 9 AM - 7 PM</p>
+            </div>
+            <div class="footer-column map-column">
+                <h3>Find Us</h3>
+                <div class="map-wrapper">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3808.161884303204!2d78.3956354!3d17.355941599999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb971f6d679dcb%3A0x8488bc0c7b4a1a5b!2sShri%20Ram%20Smart%20Minds%20Academy!5e0!3m2!1sen!2sin!4v1764562833991!5m2!1sen!2sin"
+                        width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/shriramsma/" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.linkedin.com/company/shriramsma" target="_blank"><i
+                            class="fab fa-linkedin"></i></a>
+                    <a href="https://www.youtube.com/@ShriRamSmartMindsAcademy" target="_blank"><i
+                            class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div id="back-to-top" title="Back to Top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // Configuration
+        const SHEET_ID = '1kCmbxgXCg-EVnChCfJgzQmme8EPxmAg7f86XTfWAyxo';
+        const CLASS_TABS = ['MathsClass', 'PhysicsClass', 'ChemistryClass', 'BiologyClass'];
+        const ASSIGNMENT_TABS = ['MathsAssignment', 'PhysicsAssignment', 'ChemistryAssignment', 'BiologyAssignment'];
+
+        // Data stores
+        let classesData = [];
+        let assignmentsData = [];
+
+        // Subject icons mapping
+        const subjectIcons = {
+            'Maths': 'fa-calculator',
+            'Physics': 'fa-atom',
+            'Chemistry': 'fa-flask',
+            'Biology': 'fa-dna'
+        };
+
+        // JSONP callback counter for unique function names
+        let jsonpCounter = 0;
+
+        // Fetch data using JSONP (bypasses CORS)
+        function fetchSheetDataJSONP(sheetName) {
+            return new Promise((resolve, reject) => {
+                const callbackName = `googleSheetCallback_${jsonpCounter++}`;
+                const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json;responseHandler:${callbackName}&sheet=${encodeURIComponent(sheetName)}`;
+
+                // Create global callback function
+                window[callbackName] = function (response) {
+                    // Clean up
+                    delete window[callbackName];
+                    document.head.removeChild(script);
+
+                    try {
+                        if (response && response.table) {
+                            const data = parseGoogleVizResponse(response.table, sheetName);
+                            resolve(data);
+                        } else {
+                            resolve([]);
+                        }
+                    } catch (error) {
+                        console.error(`Error parsing ${sheetName}:`, error);
+                        resolve([]);
+                    }
+                };
+
+                // Create and inject script tag
+                const script = document.createElement('script');
+                script.src = url;
+                script.onerror = () => {
+                    delete window[callbackName];
+                    document.head.removeChild(script);
+                    console.error(`Failed to load ${sheetName}`);
+                    resolve([]);
+                };
+
+                document.head.appendChild(script);
+
+                // Timeout after 10 seconds
+                setTimeout(() => {
+                    if (window[callbackName]) {
+                        delete window[callbackName];
+                        console.error(`Timeout loading ${sheetName}`);
+                        resolve([]);
+                    }
+                }, 10000);
+            });
+        }
+
+        // Parse Google Visualization API response
+        function parseGoogleVizResponse(table, sheetName) {
+            if (!table.cols || !table.rows) return [];
+
+            // Get column headers
+            const headers = table.cols.map(col =>
+                (col.label || col.id || '').toLowerCase().trim()
+            );
+
+            // Extract subject from sheet name
+            const subject = sheetName.replace('Class', '').replace('Assignment', '');
+
+            // Parse rows
+            return table.rows.map(row => {
+                const item = { subject, sheetName };
+                row.c.forEach((cell, index) => {
+                    const header = headers[index];
+                    if (header) {
+                        // Handle different cell value formats
+                        let value = '';
+                        if (cell) {
+                            if (cell.f) {
+                                value = cell.f; // Formatted value
+                            } else if (cell.v !== null && cell.v !== undefined) {
+                                value = String(cell.v); // Raw value
+                            }
+                        }
+                        item[header] = value;
+                    }
+                });
+                return item;
+            }).filter(item => item.name || item.date || item.link); // Filter empty rows
+        }
+
+        // Fetch all data in parallel
+        async function fetchAllData() {
+            try {
+                // Fetch classes
+                const classPromises = CLASS_TABS.map(tab => fetchSheetDataJSONP(tab));
+                const classResults = await Promise.all(classPromises);
+                classesData = classResults.flat();
+
+                // Fetch assignments
+                const assignmentPromises = ASSIGNMENT_TABS.map(tab => fetchSheetDataJSONP(tab));
+                const assignmentResults = await Promise.all(assignmentPromises);
+                assignmentsData = assignmentResults.flat();
+
+                // Sort by date (newest first)
+                classesData = sortByDate(classesData);
+                assignmentsData = sortByDate(assignmentsData);
+
+                // Render with Maths as default (since no All tab)
+                renderCards('classes-grid', classesData, 'View Notes', 'fa-file-alt', 'Maths');
+                renderCards('assignments-grid', assignmentsData, 'View Assignment', 'fa-external-link-alt', 'Maths');
+
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                showError('classes-grid');
+                showError('assignments-grid');
+            }
+        }
+
+        // Sort by date descending
+        function sortByDate(data) {
+            return data.sort((a, b) => {
+                const dateA = parseDate(a.date);
+                const dateB = parseDate(b.date);
+                return dateB - dateA;
+            });
+        }
+
+        // Parse date string to Date object
+        function parseDate(dateStr) {
+            if (!dateStr) return new Date(0);
+
+            // Handle Google Sheets Date() format: Date(2025,11,13)
+            const googleDateMatch = dateStr.match(/Date\((\d+),(\d+),(\d+)\)/);
+            if (googleDateMatch) {
+                return new Date(
+                    parseInt(googleDateMatch[1]),
+                    parseInt(googleDateMatch[2]),
+                    parseInt(googleDateMatch[3])
+                );
+            }
+
+            // Try standard formats
+            const date = new Date(dateStr);
+            if (!isNaN(date.getTime())) return date;
+
+            // Try DD/MM/YYYY format
+            const parts = dateStr.split(/[\/\-\.]/);
+            if (parts.length === 3) {
+                const day = parseInt(parts[0], 10);
+                const month = parseInt(parts[1], 10) - 1;
+                const year = parseInt(parts[2], 10);
+                return new Date(year, month, day);
+            }
+
+            return new Date(0);
+        }
+
+        // Format date for display
+        function formatDate(dateStr) {
+            const date = parseDate(dateStr);
+            if (date.getTime() === 0) return dateStr || 'No Date';
+
+            const options = { month: 'short', day: 'numeric', year: 'numeric' };
+            return date.toLocaleDateString('en-US', options);
+        }
+
+        // Render cards
+        function renderCards(gridId, data, ctaText, ctaIcon, filter = 'all') {
+            const grid = document.getElementById(gridId);
+
+            // Filter data if needed
+            const filteredData = filter === 'all'
+                ? data
+                : data.filter(item => item.subject === filter);
+
+            if (filteredData.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1 / -1;">
+                        <i class="fas fa-inbox"></i>
+                        <p>No items available${filter !== 'all' ? ` for ${filter}` : ''}</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = filteredData.map(item => `
+                <div class="card" data-subject="${item.subject}">
+                    <div class="card-header">
+                        <div class="card-date">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>${formatDate(item.date)}</span>
+                        </div>
+                        <span class="card-subject">
+                            <i class="fas ${subjectIcons[item.subject] || 'fa-book'}"></i>
+                            ${item.subject}
+                        </span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">${escapeHtml(item.name) || 'Untitled'}</h3>
+                        <a href="${formatUrl(item.link)}" target="_blank" rel="noopener noreferrer" class="card-cta" ${!item.link ? 'style="pointer-events: none; opacity: 0.5;"' : ''}>
+                            <i class="fas ${ctaIcon}"></i>
+                            ${ctaText}
+                        </a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Format URL - ensure it's an absolute URL
+        function formatUrl(url) {
+            if (!url) return '#';
+            url = url.trim();
+            // If already has protocol, return as-is
+            if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('//')) {
+                return url;
+            }
+            // Add https:// if no protocol
+            return 'https://' + url;
+        }
+
+        // Escape HTML to prevent XSS
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Show error state
+        function showError(gridId) {
+            const grid = document.getElementById(gridId);
+            grid.innerHTML = `
+                <div class="error-state" style="grid-column: 1 / -1;">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p>Failed to load data. Please refresh the page.</p>
+                </div>
+            `;
+        }
+
+        // Setup tab filtering
+        function setupTabs() {
+            // Classes tabs
+            document.querySelectorAll('#class-tabs .subject-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('#class-tabs .subject-tab').forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    const filter = tab.dataset.subject;
+                    renderCards('classes-grid', classesData, 'View Notes', 'fa-file-alt', filter);
+                });
+            });
+
+            // Assignments tabs
+            document.querySelectorAll('#assignment-tabs .subject-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('#assignment-tabs .subject-tab').forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    const filter = tab.dataset.subject;
+                    renderCards('assignments-grid', assignmentsData, 'View Assignment', 'fa-external-link-alt', filter);
+                });
+            });
+        }
+
+        // Mobile menu toggle
+        const menuToggle = document.querySelector('.mobile-menu-toggle');
+        const nav = document.querySelector('nav');
+
+        menuToggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+        });
+
+        // Back to top button
+        const backToTopBtn = document.getElementById('back-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            setupTabs();
+            fetchAllData();
+        });
+    </script>
+</body>
+
+</html>
