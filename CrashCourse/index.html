@@ -38,6 +38,11 @@
             --font-heading: 'Montserrat', sans-serif;
             --font-body: 'Open Sans', sans-serif;
             --transition: all 0.3s ease;
+            /* Subject Colors */
+            --maths-color: #3b82f6;
+            --physics-color: #f97316;
+            --chemistry-color: #10b981;
+            --biology-color: #8b5cf6;
         }
 
         * {
@@ -176,21 +181,55 @@
             color: var(--light-text);
         }
 
-        /* Page Header */
+        /* Page Header - Clean White Hero */
         .page-hero {
-            background: transparent;
+            background: white;
             color: var(--primary-color);
-            padding: 2rem 0;
+            padding: 2.5rem 0;
             text-align: center;
         }
 
         .page-hero h1 {
             font-size: 2.5rem;
-            margin-bottom: 0;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+            position: relative;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .page-hero h1::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--secondary-color);
+            border-radius: 2px;
         }
 
         .page-hero h1 i {
             color: var(--secondary-color);
+        }
+
+        .page-hero .tagline {
+            font-size: 1.1rem;
+            color: #666;
+            margin-top: 1rem;
+            animation: fadeInUp 0.6s ease-out 0.2s backwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Section Styles */
@@ -234,24 +273,144 @@
         }
 
         .subject-tab {
-            padding: 0.6rem 1.5rem;
-            border: 2px solid var(--primary-color);
-            border-radius: 30px;
+            padding: 0.8rem 1.8rem;
+            border: 2px solid transparent;
+            border-radius: 12px;
             font-weight: 600;
             cursor: pointer;
-            transition: var(--transition);
-            background: transparent;
-            color: var(--primary-color);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: white;
+            color: var(--text-color);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
         }
 
-        .subject-tab:hover,
-        .subject-tab.active {
-            background: var(--primary-color);
-            color: var(--light-text);
+        .subject-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: currentColor;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .subject-tab:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .subject-tab:hover::before,
+        .subject-tab.active::before {
+            transform: scaleX(1);
+        }
+
+        /* Subject-specific colors */
+        .subject-tab[data-subject="Maths"] {
+            color: var(--maths-color);
+            border-color: rgba(59, 130, 246, 0.2);
+        }
+
+        .subject-tab[data-subject="Maths"].active {
+            background: var(--maths-color);
+            color: white;
+        }
+
+        .subject-tab[data-subject="Physics"] {
+            color: var(--physics-color);
+            border-color: rgba(249, 115, 22, 0.2);
+        }
+
+        .subject-tab[data-subject="Physics"].active {
+            background: var(--physics-color);
+            color: white;
+        }
+
+        .subject-tab[data-subject="Chemistry"] {
+            color: var(--chemistry-color);
+            border-color: rgba(16, 185, 129, 0.2);
+        }
+
+        .subject-tab[data-subject="Chemistry"].active {
+            background: var(--chemistry-color);
+            color: white;
+        }
+
+        .subject-tab[data-subject="Biology"] {
+            color: var(--biology-color);
+            border-color: rgba(139, 92, 246, 0.2);
+        }
+
+        .subject-tab[data-subject="Biology"].active {
+            background: var(--biology-color);
+            color: white;
         }
 
         .subject-tab i {
             margin-right: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* Search Bar */
+        .search-container {
+            max-width: 500px;
+            margin: 0 auto 2rem;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 1.5rem 1rem 3rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-family: var(--font-body);
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(10, 25, 47, 0.1);
+        }
+
+        .search-input::placeholder {
+            color: #9ca3af;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+            font-size: 1rem;
+        }
+
+        .search-clear {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #9ca3af;
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 0.5rem;
+            display: none;
+        }
+
+        .search-clear.visible {
+            display: block;
+        }
+
+        .search-clear:hover {
+            color: var(--text-color);
         }
 
         /* Cards Grid */
@@ -388,21 +547,288 @@
             }
         }
 
-        /* Empty State */
+        /* Empty State - Enhanced */
         .empty-state {
             text-align: center;
-            padding: 3rem;
+            padding: 4rem 2rem;
             color: #666;
+            animation: fadeIn 0.5s ease-out;
         }
 
-        .empty-state i {
+        .empty-state-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .empty-state-icon::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #f97316 100%);
+            opacity: 0.1;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .empty-state-icon i {
             font-size: 3rem;
-            color: #ddd;
-            margin-bottom: 1rem;
+            color: #9ca3af;
+        }
+
+        .empty-state h3 {
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
         }
 
         .empty-state p {
-            font-size: 1.1rem;
+            font-size: 1rem;
+            color: #6b7280;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.1;
+            }
+
+            50% {
+                transform: scale(1.1);
+                opacity: 0.2;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Resources Table Styles */
+        .resources-table-container {
+            overflow-x: auto;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .resources-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .resources-table thead {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #1e3a5f 100%);
+            color: var(--light-text);
+        }
+
+        .resources-table th {
+            padding: 1rem 1.25rem;
+            text-align: left;
+            font-weight: 600;
+            font-family: var(--font-heading);
+            white-space: nowrap;
+        }
+
+        .resources-table th i {
+            margin-right: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        .resources-table tbody tr {
+            border-bottom: 1px solid #eee;
+            transition: all 0.3s ease;
+            animation: tableRowFadeIn 0.4s ease-out backwards;
+        }
+
+        /* Staggered row animation */
+        .resources-table tbody tr:nth-child(1) {
+            animation-delay: 0.05s;
+        }
+
+        .resources-table tbody tr:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .resources-table tbody tr:nth-child(3) {
+            animation-delay: 0.15s;
+        }
+
+        .resources-table tbody tr:nth-child(4) {
+            animation-delay: 0.2s;
+        }
+
+        .resources-table tbody tr:nth-child(5) {
+            animation-delay: 0.25s;
+        }
+
+        .resources-table tbody tr:nth-child(6) {
+            animation-delay: 0.3s;
+        }
+
+        .resources-table tbody tr:nth-child(7) {
+            animation-delay: 0.35s;
+        }
+
+        .resources-table tbody tr:nth-child(8) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes tableRowFadeIn {
+            from {
+                opacity: 0;
+                transform: translateX(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Alternating row colors */
+        .resources-table tbody tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+
+        .resources-table tbody tr:hover {
+            background-color: #eef2ff;
+            transform: scale(1.005);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .resources-table tbody tr:last-child {
+            border-bottom: none;
+        }
+
+        .resources-table td {
+            padding: 1rem 1.25rem;
+            vertical-align: middle;
+        }
+
+        .resources-table .date-cell {
+            font-weight: 600;
+            color: var(--primary-color);
+            white-space: nowrap;
+            background: linear-gradient(135deg, rgba(10, 25, 47, 0.03) 0%, transparent 100%);
+        }
+
+        .resources-table .date-cell i {
+            margin-right: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        .resource-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--secondary-color);
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+        }
+
+        .resource-link:hover {
+            background: #e0a800;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+        }
+
+        .resource-link.disabled {
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        .resource-link i {
+            font-size: 0.9rem;
+        }
+
+        .resource-title {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.35rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* NEW Badge */
+        .new-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 0.2rem 0.5rem;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            animation: badgePulse 2s ease-in-out infinite;
+        }
+
+        .new-badge i {
+            font-size: 0.55rem;
+        }
+
+        @keyframes badgePulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+            }
+
+            50% {
+                box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+            }
+        }
+
+        .no-resource {
+            color: #d1d5db;
+            font-style: italic;
+            font-size: 1.2rem;
+        }
+
+        /* Skeleton Table */
+        .skeleton-table {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            padding: 1rem;
+        }
+
+        .skeleton-row {
+            margin-bottom: 0.75rem;
+        }
+
+        .skeleton-row:last-child {
+            margin-bottom: 0;
         }
 
         /* Error State */
@@ -638,77 +1064,42 @@
     <section class="page-hero">
         <div class="container">
             <h1><i class="fas fa-book-open"></i> Crash Course Resources</h1>
+            <p class="tagline">Access your daily class notes and assignments in one place</p>
         </div>
     </section>
 
-    <!-- Class Notes Section -->
-    <section class="section" id="classes-section">
+    <!-- Resources Section -->
+    <section class="section" id="resources-section">
         <div class="container">
-            <h2 class="section-title"><i class="fas fa-file-alt"></i> Class Notes</h2>
-            <div class="subject-tabs" id="class-tabs">
+            <!-- Search Bar -->
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" id="search-input" placeholder="Search topics...">
+                <button class="search-clear" id="search-clear" title="Clear search">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="subject-tabs" id="subject-tabs">
                 <button class="subject-tab active" data-subject="Maths"><i class="fas fa-calculator"></i> Maths</button>
                 <button class="subject-tab" data-subject="Physics"><i class="fas fa-atom"></i> Physics</button>
                 <button class="subject-tab" data-subject="Chemistry"><i class="fas fa-flask"></i> Chemistry</button>
                 <button class="subject-tab" data-subject="Biology"><i class="fas fa-dna"></i> Biology</button>
             </div>
-            <div class="cards-grid" id="classes-grid">
+            <div class="resources-table-container" id="resources-container">
                 <!-- Skeleton loading -->
-                <div class="skeleton-card">
-                    <div class="skeleton-header"></div>
-                    <div class="skeleton-body">
-                        <div class="skeleton-line title"></div>
-                        <div class="skeleton-line button"></div>
+                <div class="skeleton-table">
+                    <div class="skeleton-row">
+                        <div class="skeleton-line" style="width: 100%; height: 50px;"></div>
                     </div>
-                </div>
-                <div class="skeleton-card">
-                    <div class="skeleton-header"></div>
-                    <div class="skeleton-body">
-                        <div class="skeleton-line title"></div>
-                        <div class="skeleton-line button"></div>
+                    <div class="skeleton-row">
+                        <div class="skeleton-line" style="width: 100%; height: 70px;"></div>
                     </div>
-                </div>
-                <div class="skeleton-card">
-                    <div class="skeleton-header"></div>
-                    <div class="skeleton-body">
-                        <div class="skeleton-line title"></div>
-                        <div class="skeleton-line button"></div>
+                    <div class="skeleton-row">
+                        <div class="skeleton-line" style="width: 100%; height: 70px;"></div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Assignments Section -->
-    <section class="section" id="assignments-section">
-        <div class="container">
-            <h2 class="section-title"><i class="fas fa-tasks"></i> Assignments</h2>
-            <div class="subject-tabs" id="assignment-tabs">
-                <button class="subject-tab active" data-subject="Maths"><i class="fas fa-calculator"></i> Maths</button>
-                <button class="subject-tab" data-subject="Physics"><i class="fas fa-atom"></i> Physics</button>
-                <button class="subject-tab" data-subject="Chemistry"><i class="fas fa-flask"></i> Chemistry</button>
-                <button class="subject-tab" data-subject="Biology"><i class="fas fa-dna"></i> Biology</button>
-            </div>
-            <div class="cards-grid" id="assignments-grid">
-                <!-- Skeleton loading -->
-                <div class="skeleton-card">
-                    <div class="skeleton-header"></div>
-                    <div class="skeleton-body">
-                        <div class="skeleton-line title"></div>
-                        <div class="skeleton-line button"></div>
-                    </div>
-                </div>
-                <div class="skeleton-card">
-                    <div class="skeleton-header"></div>
-                    <div class="skeleton-body">
-                        <div class="skeleton-line title"></div>
-                        <div class="skeleton-line button"></div>
-                    </div>
-                </div>
-                <div class="skeleton-card">
-                    <div class="skeleton-header"></div>
-                    <div class="skeleton-body">
-                        <div class="skeleton-line title"></div>
-                        <div class="skeleton-line button"></div>
+                    <div class="skeleton-row">
+                        <div class="skeleton-line" style="width: 100%; height: 70px;"></div>
                     </div>
                 </div>
             </div>
@@ -873,14 +1264,12 @@
                 classesData = sortByDate(classesData);
                 assignmentsData = sortByDate(assignmentsData);
 
-                // Render with Maths as default (since no All tab)
-                renderCards('classes-grid', classesData, 'View Notes', 'fa-file-alt', 'Maths');
-                renderCards('assignments-grid', assignmentsData, 'View Assignment', 'fa-external-link-alt', 'Maths');
+                // Render with Maths as default
+                renderResourcesTable('Maths');
 
             } catch (error) {
                 console.error('Error fetching data:', error);
-                showError('classes-grid');
-                showError('assignments-grid');
+                showError('resources-container');
             }
         }
 
@@ -932,46 +1321,173 @@
             return date.toLocaleDateString('en-US', options);
         }
 
-        // Render cards
-        function renderCards(gridId, data, ctaText, ctaIcon, filter = 'all') {
-            const grid = document.getElementById(gridId);
+        // Get date key for grouping
+        function getDateKey(dateStr) {
+            const date = parseDate(dateStr);
+            if (date.getTime() === 0) return dateStr || 'no-date';
+            return date.toISOString().split('T')[0];
+        }
 
-            // Filter data if needed
-            const filteredData = filter === 'all'
-                ? data
-                : data.filter(item => item.subject === filter);
+        // Check if item is recent (within 48 hours)
+        function isRecent(dateStr) {
+            const itemDate = parseDate(dateStr);
+            if (itemDate.getTime() === 0) return false;
+            const now = new Date();
+            const hoursDiff = (now - itemDate) / (1000 * 60 * 60);
+            return hoursDiff >= 0 && hoursDiff <= 48;
+        }
 
-            if (filteredData.length === 0) {
-                grid.innerHTML = `
-                    <div class="empty-state" style="grid-column: 1 / -1;">
-                        <i class="fas fa-inbox"></i>
-                        <p>No items available${filter !== 'all' ? ` for ${filter}` : ''}</p>
+        // Get NEW badge HTML
+        function getNewBadge(dateStr) {
+            if (isRecent(dateStr)) {
+                return `<span class="new-badge"><i class="fas fa-sparkles"></i> NEW</span>`;
+            }
+            return '';
+        }
+
+        // Current search term
+        let currentSearchTerm = '';
+
+        // Render resources table
+        function renderResourcesTable(subject, searchTerm = '') {
+            const container = document.getElementById('resources-container');
+            currentSearchTerm = searchTerm.toLowerCase().trim();
+
+            // Filter data by subject
+            let filteredClasses = classesData.filter(item => item.subject === subject);
+            let filteredAssignments = assignmentsData.filter(item => item.subject === subject);
+
+            // Apply search filter if present
+            if (currentSearchTerm) {
+                filteredClasses = filteredClasses.filter(item =>
+                    (item.name || '').toLowerCase().includes(currentSearchTerm)
+                );
+                filteredAssignments = filteredAssignments.filter(item =>
+                    (item.name || '').toLowerCase().includes(currentSearchTerm)
+                );
+            }
+
+            // Group by date
+            const dateMap = new Map();
+
+            // Add classes
+            filteredClasses.forEach(item => {
+                const dateKey = getDateKey(item.date);
+                if (!dateMap.has(dateKey)) {
+                    dateMap.set(dateKey, { date: item.date, classes: [], assignments: [] });
+                }
+                dateMap.get(dateKey).classes.push(item);
+            });
+
+            // Add assignments
+            filteredAssignments.forEach(item => {
+                const dateKey = getDateKey(item.date);
+                if (!dateMap.has(dateKey)) {
+                    dateMap.set(dateKey, { date: item.date, classes: [], assignments: [] });
+                }
+                dateMap.get(dateKey).assignments.push(item);
+            });
+
+            // Convert to array and sort by date (newest first)
+            const sortedDates = Array.from(dateMap.values()).sort((a, b) => {
+                return parseDate(b.date) - parseDate(a.date);
+            });
+
+            if (sortedDates.length === 0) {
+                const emptyMessage = currentSearchTerm
+                    ? `No results found for "${escapeHtml(currentSearchTerm)}" in ${subject}`
+                    : `No resources available for ${subject} yet`;
+
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">
+                            <i class="fas ${currentSearchTerm ? 'fa-search' : 'fa-folder-open'}"></i>
+                        </div>
+                        <h3>${currentSearchTerm ? 'No Results Found' : 'No Resources Yet'}</h3>
+                        <p>${emptyMessage}</p>
                     </div>
                 `;
                 return;
             }
 
-            grid.innerHTML = filteredData.map(item => `
-                <div class="card" data-subject="${item.subject}">
-                    <div class="card-header">
-                        <div class="card-date">
-                            <i class="fas fa-calendar-alt"></i>
-                            <span>${formatDate(item.date)}</span>
-                        </div>
-                        <span class="card-subject">
-                            <i class="fas ${subjectIcons[item.subject] || 'fa-book'}"></i>
-                            ${item.subject}
-                        </span>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">${escapeHtml(item.name) || 'Untitled'}</h3>
-                        <a href="${formatUrl(item.link)}" target="_blank" rel="noopener noreferrer" class="card-cta" ${!item.link ? 'style="pointer-events: none; opacity: 0.5;"' : ''}>
-                            <i class="fas ${ctaIcon}"></i>
-                            ${ctaText}
-                        </a>
-                    </div>
-                </div>
-            `).join('');
+            // Render table
+            let html = `
+                <table class="resources-table">
+                    <thead>
+                        <tr>
+                            <th><i class="fas fa-calendar-alt"></i> Date</th>
+                            <th><i class="fas fa-file-alt"></i> Class Notes</th>
+                            <th><i class="fas fa-tasks"></i> Assignment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            sortedDates.forEach(dayData => {
+                const maxRows = Math.max(dayData.classes.length, dayData.assignments.length, 1);
+
+                for (let i = 0; i < maxRows; i++) {
+                    const classItem = dayData.classes[i];
+                    const assignmentItem = dayData.assignments[i];
+
+                    html += `<tr>`;
+
+                    // Date column (only on first row for this date)
+                    if (i === 0) {
+                        html += `
+                            <td class="date-cell" ${maxRows > 1 ? `rowspan="${maxRows}"` : ''}>
+                                <i class="fas fa-calendar-alt"></i>
+                                ${formatDate(dayData.date)}
+                            </td>
+                        `;
+                    }
+
+                    // Class column
+                    html += `<td>`;
+                    if (classItem) {
+                        html += `
+                            <div class="resource-title">
+                                ${escapeHtml(classItem.name) || 'Untitled'}
+                                ${getNewBadge(classItem.date)}
+                            </div>
+                            <a href="${formatUrl(classItem.link)}" target="_blank" rel="noopener noreferrer" 
+                               class="resource-link ${!classItem.link ? 'disabled' : ''}">
+                                <i class="fas fa-file-alt"></i> View Notes
+                            </a>
+                        `;
+                    } else {
+                        html += `<span class="no-resource">—</span>`;
+                    }
+                    html += `</td>`;
+
+                    // Assignment column
+                    html += `<td>`;
+                    if (assignmentItem) {
+                        html += `
+                            <div class="resource-title">
+                                ${escapeHtml(assignmentItem.name) || 'Untitled'}
+                                ${getNewBadge(assignmentItem.date)}
+                            </div>
+                            <a href="${formatUrl(assignmentItem.link)}" target="_blank" rel="noopener noreferrer" 
+                               class="resource-link ${!assignmentItem.link ? 'disabled' : ''}">
+                                <i class="fas fa-external-link-alt"></i> View Assignment
+                            </a>
+                        `;
+                    } else {
+                        html += `<span class="no-resource">—</span>`;
+                    }
+                    html += `</td>`;
+
+                    html += `</tr>`;
+                }
+            });
+
+            html += `
+                    </tbody>
+                </table>
+            `;
+
+            container.innerHTML = html;
         }
 
         // Format URL - ensure it's an absolute URL
@@ -995,10 +1511,10 @@
         }
 
         // Show error state
-        function showError(gridId) {
-            const grid = document.getElementById(gridId);
-            grid.innerHTML = `
-                <div class="error-state" style="grid-column: 1 / -1;">
+        function showError(containerId) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = `
+                <div class="error-state">
                     <i class="fas fa-exclamation-triangle"></i>
                     <p>Failed to load data. Please refresh the page.</p>
                 </div>
@@ -1007,25 +1523,54 @@
 
         // Setup tab filtering
         function setupTabs() {
-            // Classes tabs
-            document.querySelectorAll('#class-tabs .subject-tab').forEach(tab => {
+            document.querySelectorAll('#subject-tabs .subject-tab').forEach(tab => {
                 tab.addEventListener('click', () => {
-                    document.querySelectorAll('#class-tabs .subject-tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('#subject-tabs .subject-tab').forEach(t => t.classList.remove('active'));
                     tab.classList.add('active');
-                    const filter = tab.dataset.subject;
-                    renderCards('classes-grid', classesData, 'View Notes', 'fa-file-alt', filter);
+                    const subject = tab.dataset.subject;
+                    const searchInput = document.getElementById('search-input');
+                    renderResourcesTable(subject, searchInput ? searchInput.value : '');
                 });
+            });
+        }
+
+        // Setup search functionality
+        function setupSearch() {
+            const searchInput = document.getElementById('search-input');
+            const searchClear = document.getElementById('search-clear');
+            let debounceTimer;
+
+            if (!searchInput) return;
+
+            // Update clear button visibility
+            function updateClearButton() {
+                if (searchClear) {
+                    searchClear.classList.toggle('visible', searchInput.value.length > 0);
+                }
+            }
+
+            // Search input handler with debounce
+            searchInput.addEventListener('input', () => {
+                updateClearButton();
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => {
+                    const activeTab = document.querySelector('#subject-tabs .subject-tab.active');
+                    const subject = activeTab ? activeTab.dataset.subject : 'Maths';
+                    renderResourcesTable(subject, searchInput.value);
+                }, 300);
             });
 
-            // Assignments tabs
-            document.querySelectorAll('#assignment-tabs .subject-tab').forEach(tab => {
-                tab.addEventListener('click', () => {
-                    document.querySelectorAll('#assignment-tabs .subject-tab').forEach(t => t.classList.remove('active'));
-                    tab.classList.add('active');
-                    const filter = tab.dataset.subject;
-                    renderCards('assignments-grid', assignmentsData, 'View Assignment', 'fa-external-link-alt', filter);
+            // Clear button handler
+            if (searchClear) {
+                searchClear.addEventListener('click', () => {
+                    searchInput.value = '';
+                    updateClearButton();
+                    const activeTab = document.querySelector('#subject-tabs .subject-tab.active');
+                    const subject = activeTab ? activeTab.dataset.subject : 'Maths';
+                    renderResourcesTable(subject, '');
+                    searchInput.focus();
                 });
-            });
+            }
         }
 
         // Mobile menu toggle
@@ -1057,6 +1602,7 @@
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             setupTabs();
+            setupSearch();
             fetchAllData();
         });
     </script>
