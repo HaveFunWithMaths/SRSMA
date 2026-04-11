@@ -1244,12 +1244,11 @@
     <script>
         // Configuration
         const SHEET_ID = '1kCmbxgXCg-EVnChCfJgzQmme8EPxmAg7f86XTfWAyxo';
-        const CLASS_TABS = ['MathsClass', 'PhysicsClass', 'ChemistryClass', 'BiologyClass'];
-        const ASSIGNMENT_TABS = ['MathsAssignment', 'PhysicsAssignment', 'ChemistryAssignment', 'BiologyAssignment'];
+        const SUBJECT_TABS = ['Maths', 'Physics', 'Chemistry', 'Biology'];
 
         // Data stores
-        let classesData = [];
-        let assignmentsData = [];
+        let allResourcesData = [];
+
 
         // Subject icons mapping
         const subjectIcons = {
@@ -1341,25 +1340,19 @@
                     }
                 });
                 return item;
-            }).filter(item => item.name || item.date || item.link); // Filter empty rows
+            }).filter(item => item.topic || item.date || item.assignment); // Filter empty rows
         }
 
         // Fetch all data in parallel
         async function fetchAllData() {
             try {
-                // Fetch classes
-                const classPromises = CLASS_TABS.map(tab => fetchSheetDataJSONP(tab));
-                const classResults = await Promise.all(classPromises);
-                classesData = classResults.flat();
-
-                // Fetch assignments
-                const assignmentPromises = ASSIGNMENT_TABS.map(tab => fetchSheetDataJSONP(tab));
-                const assignmentResults = await Promise.all(assignmentPromises);
-                assignmentsData = assignmentResults.flat();
+                // Fetch all data
+                const promises = SUBJECT_TABS.map(tab => fetchSheetDataJSONP(tab));
+                const results = await Promise.all(promises);
+                allResourcesData = results.flat();
 
                 // Sort by date (newest first)
-                classesData = sortByDate(classesData);
-                assignmentsData = sortByDate(assignmentsData);
+                allResourcesData = sortByDate(allResourcesData);
 
                 // Update progress indicators
                 updateProgressIndicators();
@@ -1379,9 +1372,8 @@
             const circumference = 94.2; // 2 * PI * 15
 
             subjects.forEach(subject => {
-                const classCount = classesData.filter(item => item.subject === subject).length;
-                const assignmentCount = assignmentsData.filter(item => item.subject === subject).length;
-                const total = classCount + assignmentCount;
+                const subjectData = allResourcesData.filter(item => item.subject === subject);
+                const total = subjectData.length;
 
                 // Update text
                 const textEl = document.getElementById(`progress-${subject.toLowerCase()}-text`);
@@ -1478,38 +1470,25 @@
             currentSearchTerm = searchTerm.toLowerCase().trim();
 
             // Filter data by subject
-            let filteredClasses = classesData.filter(item => item.subject === subject);
-            let filteredAssignments = assignmentsData.filter(item => item.subject === subject);
+            let filteredData = allResourcesData.filter(item => item.subject === subject);
 
             // Apply search filter if present
             if (currentSearchTerm) {
-                filteredClasses = filteredClasses.filter(item =>
-                    (item.name || '').toLowerCase().includes(currentSearchTerm)
-                );
-                filteredAssignments = filteredAssignments.filter(item =>
-                    (item.name || '').toLowerCase().includes(currentSearchTerm)
+                filteredData = filteredData.filter(item =>
+                    (item.topic || '').toLowerCase().includes(currentSearchTerm) ||
+                    (item.assignment || '').toLowerCase().includes(currentSearchTerm)
                 );
             }
 
             // Group by date
             const dateMap = new Map();
 
-            // Add classes
-            filteredClasses.forEach(item => {
+            filteredData.forEach(item => {
                 const dateKey = getDateKey(item.date);
                 if (!dateMap.has(dateKey)) {
-                    dateMap.set(dateKey, { date: item.date, classes: [], assignments: [] });
+                    dateMap.set(dateKey, { date: item.date, items: [] });
                 }
-                dateMap.get(dateKey).classes.push(item);
-            });
-
-            // Add assignments
-            filteredAssignments.forEach(item => {
-                const dateKey = getDateKey(item.date);
-                if (!dateMap.has(dateKey)) {
-                    dateMap.set(dateKey, { date: item.date, classes: [], assignments: [] });
-                }
-                dateMap.get(dateKey).assignments.push(item);
+                dateMap.get(dateKey).items.push(item);
             });
 
             // Convert to array and sort by date (newest first)
@@ -1548,11 +1527,9 @@
             `;
 
             sortedDates.forEach(dayData => {
-                const maxRows = Math.max(dayData.classes.length, dayData.assignments.length, 1);
+                const maxRows = dayData.items.length;
 
-                for (let i = 0; i < maxRows; i++) {
-                    const classItem = dayData.classes[i];
-                    const assignmentItem = dayData.assignments[i];
+                dayData.items.forEach((item, i) => {
                     const isFirstRow = i === 0;
 
                     html += `<tr data-date="${formatDate(dayData.date)}">`;
@@ -1577,14 +1554,14 @@
 
                     // Class column
                     html += `<td>`;
-                    if (classItem) {
+                    if (item.topic) {
                         html += `
                             <div class="resource-title">
-                                ${escapeHtml(classItem.name) || 'Untitled'}
-                                ${getNewBadge(classItem.date)}
+                                ${escapeHtml(item.topic) || 'Untitled'}
+                                ${getNewBadge(item.date)}
                             </div>
-                            <a href="${formatUrl(classItem.link)}" target="_blank" rel="noopener noreferrer" 
-                               class="resource-link ${!classItem.link ? 'disabled' : ''}">
+                            <a href="${formatUrl(item['topic link'])}" target="_blank" rel="noopener noreferrer" 
+                               class="resource-link ${!item['topic link'] ? 'disabled' : ''}">
                                 <i class="fas fa-file-alt"></i> View Notes
                             </a>
                         `;
@@ -1595,14 +1572,14 @@
 
                     // Assignment column
                     html += `<td>`;
-                    if (assignmentItem) {
+                    if (item.assignment) {
                         html += `
                             <div class="resource-title">
-                                ${escapeHtml(assignmentItem.name) || 'Untitled'}
-                                ${getNewBadge(assignmentItem.date)}
+                                ${escapeHtml(item.assignment) || 'Untitled'}
+                                ${getNewBadge(item.date)}
                             </div>
-                            <a href="${formatUrl(assignmentItem.link)}" target="_blank" rel="noopener noreferrer" 
-                               class="resource-link ${!assignmentItem.link ? 'disabled' : ''}">
+                            <a href="${formatUrl(item['assignment link'])}" target="_blank" rel="noopener noreferrer" 
+                               class="resource-link ${!item['assignment link'] ? 'disabled' : ''}">
                                 <i class="fas fa-external-link-alt"></i> View Assignment
                             </a>
                         `;
@@ -1612,7 +1589,7 @@
                     html += `</td>`;
 
                     html += `</tr>`;
-                }
+                });
             });
 
             html += `
