@@ -17,6 +17,16 @@
         content="Class 9 Resources - Access class notes and assignments for Maths, Physics, Chemistry, and Biology at SRSMA.">
     <title>Class 9 Resources | SRSMA</title>
 
+    <script>
+        // Check for saved theme preference, default to dark
+        const theme = localStorage.getItem('theme') || 'dark';
+        if (theme === 'light') {
+            document.documentElement.classList.add('light-mode');
+        } else {
+            document.documentElement.classList.remove('light-mode');
+        }
+    </script>
+
     <!-- Favicon -->
     <link rel="icon" href="/assets/images/logowhite.jpeg" type="image/jpeg">
     <!-- Google Fonts -->
