@@ -1,0 +1,1721 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7WLZ80HJC0"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-7WLZ80HJC0');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Class 8 Resources - Access class notes and assignments for Maths, Physics, Chemistry, and Biology at SRSMA.">
+    <title>Class 8 Resources | SRSMA</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="/assets/images/logowhite.jpeg" type="image/jpeg">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-color: #0a192f;
+            --secondary-color: #ffc107;
+            --text-color: #333333;
+            --light-text: #ffffff;
+            --background-color: #ffffff;
+            --section-bg: #f4f4f4;
+            --font-heading: 'Montserrat', sans-serif;
+            --font-body: 'Open Sans', sans-serif;
+            --transition: all 0.3s ease;
+            /* Subject Colors */
+            --maths-color: #3b82f6;
+            --physics-color: #f97316;
+            --chemistry-color: #10b981;
+            --biology-color: #8b5cf6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-color: var(--background-color);
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: 0.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo img {
+            height: 80px;
+            background: white;
+            border-radius: 5px;
+            padding: 2px;
+        }
+
+        .logo-text {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--light-text);
+            line-height: 1.2;
+            max-width: 200px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--light-text);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .cta-button {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            padding: 0.6rem 1.5rem;
+            border-radius: 5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .cta-button:hover {
+            background-color: #e0a800;
+            transform: translateY(-2px);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--light-text);
+        }
+
+        /* Page Header - Clean White Hero */
+        .page-hero {
+            background: white;
+            color: var(--primary-color);
+            padding: 2.5rem 0;
+            text-align: center;
+        }
+
+        .page-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+            position: relative;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .page-hero h1::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--secondary-color);
+            border-radius: 2px;
+        }
+
+        .page-hero h1 i {
+            color: var(--secondary-color);
+        }
+
+        .page-hero .tagline {
+            font-size: 1.1rem;
+            color: #666;
+            margin-top: 1rem;
+            animation: fadeInUp 0.6s ease-out 0.2s backwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 2rem 0 4rem;
+        }
+
+        #resources-section {
+            padding-top: 1rem;
+        }
+
+        .section:nth-child(even) {
+            background-color: var(--section-bg);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--secondary-color);
+            margin: 10px auto 0;
+        }
+
+        .section-title i {
+            margin-right: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        /* Subject Tabs */
+        .subject-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .subject-tab {
+            padding: 0.8rem 1.8rem;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: white;
+            color: var(--text-color);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .subject-tab:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Subject-specific colors */
+        .subject-tab[data-subject="Maths"] {
+            color: var(--maths-color);
+        }
+
+        .subject-tab[data-subject="Maths"].active {
+            background: var(--maths-color);
+            color: white;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+        }
+
+        .subject-tab[data-subject="Physics"] {
+            color: var(--physics-color);
+        }
+
+        .subject-tab[data-subject="Physics"].active {
+            background: var(--physics-color);
+            color: white;
+            box-shadow: 0 4px 15px rgba(249, 115, 22, 0.4);
+        }
+
+        .subject-tab[data-subject="Chemistry"] {
+            color: var(--chemistry-color);
+        }
+
+        .subject-tab[data-subject="Chemistry"].active {
+            background: var(--chemistry-color);
+            color: white;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+        }
+
+        .subject-tab[data-subject="Biology"] {
+            color: var(--biology-color);
+        }
+
+        .subject-tab[data-subject="Biology"].active {
+            background: var(--biology-color);
+            color: white;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+        }
+
+        .subject-tab i {
+            margin-right: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* Glassmorphism Table Container */
+        .resources-table-container {
+            overflow-x: auto;
+            animation: fadeIn 0.5s ease-out;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            padding: 0.5rem;
+        }
+
+        /* Search Bar */
+        .search-container {
+            max-width: 500px;
+            margin: 0 auto 2rem;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 1.5rem 1rem 3rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-family: var(--font-body);
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(10, 25, 47, 0.1);
+        }
+
+        .search-input::placeholder {
+            color: #9ca3af;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+            font-size: 1rem;
+        }
+
+        .search-clear {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #9ca3af;
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 0.5rem;
+            display: none;
+        }
+
+        .search-clear.visible {
+            display: block;
+        }
+
+        .search-clear:hover {
+            color: var(--text-color);
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Card Styles */
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid #eee;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #1e3a5f 100%);
+            color: var(--light-text);
+            padding: 1rem 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-date {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .card-date i {
+            color: var(--secondary-color);
+        }
+
+        .card-subject {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .card-body {
+            padding: 1.25rem;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .card-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--secondary-color);
+            color: var(--primary-color);
+            padding: 0.7rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            transition: var(--transition);
+            width: 100%;
+            justify-content: center;
+        }
+
+        .card-cta:hover {
+            background: #e0a800;
+            transform: translateY(-2px);
+        }
+
+        .card-cta i {
+            font-size: 1rem;
+        }
+
+        /* Skeleton Loading */
+        .skeleton-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #eee;
+        }
+
+        .skeleton-header {
+            background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            height: 60px;
+        }
+
+        .skeleton-body {
+            padding: 1.25rem;
+        }
+
+        .skeleton-line {
+            background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 4px;
+            margin-bottom: 0.75rem;
+        }
+
+        .skeleton-line.title {
+            height: 24px;
+            width: 80%;
+        }
+
+        .skeleton-line.button {
+            height: 44px;
+            width: 100%;
+            margin-bottom: 0;
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: 200% 0;
+            }
+
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        /* Empty State - Enhanced */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #666;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .empty-state-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .empty-state-icon::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #f97316 100%);
+            opacity: 0.1;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .empty-state-icon i {
+            font-size: 3rem;
+            color: #9ca3af;
+        }
+
+        .empty-state h3 {
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .empty-state p {
+            font-size: 1rem;
+            color: #6b7280;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.1;
+            }
+
+            50% {
+                transform: scale(1.1);
+                opacity: 0.2;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Resources Table Styles */
+        .resources-table-container {
+            overflow-x: auto;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .resources-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .resources-table thead {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #1e3a5f 100%);
+            color: var(--light-text);
+        }
+
+        .resources-table th {
+            padding: 1rem 1.25rem;
+            text-align: left;
+            font-weight: 600;
+            font-family: var(--font-heading);
+            white-space: nowrap;
+        }
+
+        .resources-table th i {
+            margin-right: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        .resources-table tbody tr {
+            border-bottom: 1px solid #eee;
+            transition: all 0.3s ease;
+            animation: tableRowFadeIn 0.4s ease-out backwards;
+        }
+
+        /* Staggered row animation */
+        .resources-table tbody tr:nth-child(1) {
+            animation-delay: 0.05s;
+        }
+
+        .resources-table tbody tr:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .resources-table tbody tr:nth-child(3) {
+            animation-delay: 0.15s;
+        }
+
+        .resources-table tbody tr:nth-child(4) {
+            animation-delay: 0.2s;
+        }
+
+        .resources-table tbody tr:nth-child(5) {
+            animation-delay: 0.25s;
+        }
+
+        .resources-table tbody tr:nth-child(6) {
+            animation-delay: 0.3s;
+        }
+
+        .resources-table tbody tr:nth-child(7) {
+            animation-delay: 0.35s;
+        }
+
+        .resources-table tbody tr:nth-child(8) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes tableRowFadeIn {
+            from {
+                opacity: 0;
+                transform: translateX(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Alternating row colors */
+        .resources-table tbody tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+
+        .resources-table tbody tr:hover {
+            background-color: #eef2ff;
+            transform: scale(1.005);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .resources-table tbody tr:last-child {
+            border-bottom: none;
+        }
+
+        .resources-table td {
+            padding: 1rem 1.25rem;
+            vertical-align: middle;
+        }
+
+        .resources-table .date-cell {
+            font-weight: 600;
+            color: var(--primary-color);
+            white-space: nowrap;
+            background: linear-gradient(135deg, rgba(10, 25, 47, 0.03) 0%, transparent 100%);
+        }
+
+        .resources-table .date-cell i {
+            margin-right: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        /* Hide mobile date on desktop */
+        .resources-table .mobile-date {
+            display: none;
+        }
+
+        .resource-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--secondary-color);
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+        }
+
+        .resource-link:hover {
+            background: #e0a800;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+        }
+
+        .resource-link.disabled {
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        .resource-link i {
+            font-size: 0.9rem;
+        }
+
+        .resource-title {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.35rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* NEW Badge */
+        .new-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 0.2rem 0.5rem;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            animation: badgePulse 2s ease-in-out infinite;
+        }
+
+        .new-badge i {
+            font-size: 0.55rem;
+        }
+
+        @keyframes badgePulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+            }
+
+            50% {
+                box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+            }
+        }
+
+        .no-resource {
+            color: #d1d5db;
+            font-style: italic;
+            font-size: 1.2rem;
+        }
+
+        /* Skeleton Table */
+        .skeleton-table {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            padding: 1rem;
+        }
+
+        .skeleton-row {
+            margin-bottom: 0.75rem;
+        }
+
+        .skeleton-row:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Error State */
+        .error-state {
+            text-align: center;
+            padding: 2rem;
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 10px;
+            color: #856404;
+        }
+
+        .error-state i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .footer-column h3 {
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .info-column p {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+        }
+
+        .info-column i {
+            width: 20px;
+            color: var(--secondary-color);
+        }
+
+        .map-wrapper {
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-icons a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover {
+            background: var(--secondary-color);
+            color: var(--primary-color);
+        }
+
+        /* Back to Top */
+        #back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+            opacity: 0;
+            visibility: hidden;
+            z-index: 999;
+        }
+
+        #back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #back-to-top:hover {
+            transform: translateY(-5px);
+            background-color: #e0a800;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--primary-color);
+                flex-direction: column;
+                padding: 1rem 0;
+                text-align: center;
+            }
+
+            nav.active {
+                display: flex;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .page-hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.75rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .logo-text {
+                font-size: 1rem;
+            }
+
+            /* Mobile Card Layout for Resources Table */
+            .resources-table {
+                display: block;
+            }
+
+            .resources-table thead {
+                display: none;
+            }
+
+            .resources-table tbody {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .resources-table tbody tr {
+                display: flex;
+                flex-direction: column;
+                background: white;
+                border-radius: 12px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+                border: 1px solid #eee;
+                overflow: hidden;
+                animation: none;
+            }
+
+            .resources-table tbody tr:hover {
+                transform: none;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            }
+
+            .resources-table td {
+                display: block;
+                padding: 1rem;
+                border-bottom: 1px solid #f0f0f0;
+            }
+
+            .resources-table td:last-child {
+                border-bottom: none;
+            }
+
+            .resources-table .date-cell {
+                background: linear-gradient(135deg, var(--primary-color) 0%, #1e3a5f 100%);
+                color: white;
+                font-size: 0.95rem;
+                padding: 0.75rem 1rem;
+            }
+
+            .resources-table .date-cell i {
+                color: var(--secondary-color);
+            }
+
+            /* Show mobile date, hide desktop date on mobile */
+            .resources-table .mobile-date {
+                display: block !important;
+            }
+
+            .resources-table .desktop-date {
+                display: none !important;
+            }
+
+            /* Add labels before content on mobile */
+            .resources-table td:not(.date-cell)::before {
+                content: attr(data-label);
+                display: block;
+                font-weight: 700;
+                font-size: 0.75rem;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                color: #6b7280;
+                margin-bottom: 0.5rem;
+            }
+
+            .resources-table td:nth-child(3)::before {
+                content: "📝 Class Notes";
+            }
+
+            .resources-table td:nth-child(4)::before {
+                content: "📋 Assignment";
+            }
+
+            /* Handle cells that only have dash */
+            .resources-table td:has(.no-resource) {
+                display: none;
+            }
+
+            .resource-link {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                width: 95%;
+                padding: 0 10px;
+            }
+
+            .logo img {
+                height: 60px;
+            }
+
+            .logo-text {
+                font-size: 0.75rem;
+                max-width: 120px;
+            }
+
+            .page-hero {
+                padding: 2rem 0;
+            }
+
+            .page-hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .section {
+                padding: 3rem 0;
+            }
+
+            .subject-tab {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            #back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <div class="logo-container">
+                <a href="/" class="logo">
+                    <img src="/assets/images/logowhite.jpeg" alt="SRSMA Logo">
+                </a>
+                <div class="logo-text">Shri Ram Smart Minds Academy</div>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/#courses">Courses</a></li>
+                    <li><a href="/#faculty">Faculty</a></li>
+                    <li><a href="/#contact">Contact Us</a></li>
+                </ul>
+                <a href="/talk-to-us.html" class="cta-button">Talk to Us</a>
+            </nav>
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-hero">
+        <div class="container">
+            <h1><i class="fas fa-book-open"></i> Class 8 Resources</h1>
+            <p class="tagline">Access your daily class notes and assignments in one place</p>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section class="section" id="resources-section">
+        <div class="container">
+            <!-- Search Bar -->
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" id="search-input"
+                    placeholder="Search topics in Selected Subject...">
+                <button class="search-clear" id="search-clear" title="Clear search">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="subject-tabs" id="subject-tabs">
+                <button class="subject-tab active" data-subject="Maths"><i class="fas fa-calculator"></i> Maths</button>
+                <button class="subject-tab" data-subject="Physics"><i class="fas fa-atom"></i> Physics</button>
+                <button class="subject-tab" data-subject="Chemistry"><i class="fas fa-flask"></i> Chemistry</button>
+                <button class="subject-tab" data-subject="Biology"><i class="fas fa-dna"></i> Biology</button>
+            </div>
+
+            <div class="resources-table-container" id="resources-container">
+                <!-- Skeleton loading -->
+                <div class="skeleton-table">
+                    <div class="skeleton-row">
+                        <div class="skeleton-line" style="width: 100%; height: 50px;"></div>
+                    </div>
+                    <div class="skeleton-row">
+                        <div class="skeleton-line" style="width: 100%; height: 70px;"></div>
+                    </div>
+                    <div class="skeleton-row">
+                        <div class="skeleton-line" style="width: 100%; height: 70px;"></div>
+                    </div>
+                    <div class="skeleton-row">
+                        <div class="skeleton-line" style="width: 100%; height: 70px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container footer-container">
+            <div class="footer-column info-column">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i>Shri Ram Smart Minds Academy,
+                    2nd Floor Sankirtan Bhavan,
+                    Bandlaguda Jagir,
+                    Sun City,
+                    Hyderabad</p>
+                <p><i class="fas fa-phone"></i>+91 84639 11854</p>
+                <p><i class="fas fa-envelope"></i>smartmindsacademy108@gmail.com</p>
+                <p><i class="fas fa-clock"></i>Mon-Sat, 9 AM - 7 PM</p>
+            </div>
+            <div class="footer-column map-column">
+                <h3>Find Us</h3>
+                <div class="map-wrapper">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3808.161884303204!2d78.3956354!3d17.355941599999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb971f6d679dcb%3A0x8488bc0c7b4a1a5b!2sShri%20Ram%20Smart%20Minds%20Academy!5e0!3m2!1sen!2sin!4v1764562833991!5m2!1sen!2sin"
+                        width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/shriramsma/" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.linkedin.com/company/shriramsma" target="_blank"><i
+                            class="fab fa-linkedin"></i></a>
+                    <a href="https://www.youtube.com/@ShriRamSmartMindsAcademy" target="_blank"><i
+                            class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div id="back-to-top" title="Back to Top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // Configuration
+        const SHEET_ID = '1sWwawv59XjSEPZ_gOZGkbctaaAgV4G_ZgoCuhJFl7qc';
+        const SUBJECT_TABS = ['Maths', 'Physics', 'Chemistry', 'Biology'];
+
+        // Data stores
+        let allResourcesData = [];
+
+
+        // Subject icons mapping
+        const subjectIcons = {
+            'Maths': 'fa-calculator',
+            'Physics': 'fa-atom',
+            'Chemistry': 'fa-flask',
+            'Biology': 'fa-dna'
+        };
+
+        // JSONP callback counter for unique function names
+        let jsonpCounter = 0;
+
+        // Fetch data using JSONP (bypasses CORS)
+        function fetchSheetDataJSONP(sheetName) {
+            return new Promise((resolve, reject) => {
+                const callbackName = `googleSheetCallback_${jsonpCounter++}`;
+                const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json;responseHandler:${callbackName}&sheet=${encodeURIComponent(sheetName)}`;
+
+                // Create global callback function
+                window[callbackName] = function (response) {
+                    // Clean up
+                    delete window[callbackName];
+                    document.head.removeChild(script);
+
+                    try {
+                        if (response && response.table) {
+                            const data = parseGoogleVizResponse(response.table, sheetName);
+                            resolve(data);
+                        } else {
+                            resolve([]);
+                        }
+                    } catch (error) {
+                        console.error(`Error parsing ${sheetName}:`, error);
+                        resolve([]);
+                    }
+                };
+
+                // Create and inject script tag
+                const script = document.createElement('script');
+                script.src = url;
+                script.onerror = () => {
+                    delete window[callbackName];
+                    document.head.removeChild(script);
+                    console.error(`Failed to load ${sheetName}`);
+                    resolve([]);
+                };
+
+                document.head.appendChild(script);
+
+                // Timeout after 10 seconds
+                setTimeout(() => {
+                    if (window[callbackName]) {
+                        delete window[callbackName];
+                        console.error(`Timeout loading ${sheetName}`);
+                        resolve([]);
+                    }
+                }, 10000);
+            });
+        }
+
+        // Parse Google Visualization API response
+        function parseGoogleVizResponse(table, sheetName) {
+            if (!table.cols || !table.rows) return [];
+
+            // Get column headers
+            const headers = table.cols.map(col =>
+                (col.label || col.id || '').toLowerCase().trim()
+            );
+
+            // Extract subject from sheet name
+            const subject = sheetName.replace('Class', '').replace('Assignment', '');
+
+            // Parse rows
+            return table.rows.map(row => {
+                const item = { subject, sheetName };
+                row.c.forEach((cell, index) => {
+                    const header = headers[index];
+                    if (header) {
+                        // Handle different cell value formats
+                        let value = '';
+                        if (cell) {
+                            if (cell.f) {
+                                value = cell.f; // Formatted value
+                            } else if (cell.v !== null && cell.v !== undefined) {
+                                value = String(cell.v); // Raw value
+                            }
+                        }
+                        item[header] = value;
+                    }
+                });
+                return item;
+            }).filter(item => item.topic || item.date || item.assignment); // Filter empty rows
+        }
+
+        // Fetch all data in parallel
+        async function fetchAllData() {
+            try {
+                // Fetch all data
+                const promises = SUBJECT_TABS.map(tab => fetchSheetDataJSONP(tab));
+                const results = await Promise.all(promises);
+                allResourcesData = results.flat();
+
+                // Sort by date (newest first)
+                allResourcesData = sortByDate(allResourcesData);
+
+                // Update progress indicators
+                updateProgressIndicators();
+
+                // Render with Maths as default
+                renderResourcesTable('Maths');
+
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                showError('resources-container');
+            }
+        }
+
+        // Update progress indicators
+        function updateProgressIndicators() {
+            const subjects = ['Maths', 'Physics', 'Chemistry', 'Biology'];
+            const circumference = 94.2; // 2 * PI * 15
+
+            subjects.forEach(subject => {
+                const subjectData = allResourcesData.filter(item => item.subject === subject);
+                const total = subjectData.length;
+
+                // Update text
+                const textEl = document.getElementById(`progress-${subject.toLowerCase()}-text`);
+                if (textEl) textEl.textContent = total;
+
+                // Update circle (max 20 resources = full circle)
+                const circleEl = document.getElementById(`progress-${subject.toLowerCase()}`);
+                if (circleEl) {
+                    const percentage = Math.min(total / 20, 1);
+                    const offset = circumference * (1 - percentage);
+                    circleEl.style.strokeDashoffset = offset;
+                }
+            });
+        }
+
+        // Sort by date descending
+        function sortByDate(data) {
+            return data.sort((a, b) => {
+                const dateA = parseDate(a.date);
+                const dateB = parseDate(b.date);
+                return dateB - dateA;
+            });
+        }
+
+        // Parse date string to Date object
+        function parseDate(dateStr) {
+            if (!dateStr) return new Date(0);
+
+            // Handle Google Sheets Date() format: Date(2025,11,13)
+            const googleDateMatch = dateStr.match(/Date\((\d+),(\d+),(\d+)\)/);
+            if (googleDateMatch) {
+                return new Date(
+                    parseInt(googleDateMatch[1]),
+                    parseInt(googleDateMatch[2]),
+                    parseInt(googleDateMatch[3])
+                );
+            }
+
+            // Try standard formats
+            const date = new Date(dateStr);
+            if (!isNaN(date.getTime())) return date;
+
+            // Try DD/MM/YYYY format
+            const parts = dateStr.split(/[\/\-\.]/);
+            if (parts.length === 3) {
+                const day = parseInt(parts[0], 10);
+                const month = parseInt(parts[1], 10) - 1;
+                const year = parseInt(parts[2], 10);
+                return new Date(year, month, day);
+            }
+
+            return new Date(0);
+        }
+
+        // Format date for display
+        function formatDate(dateStr) {
+            const date = parseDate(dateStr);
+            if (date.getTime() === 0) return dateStr || 'No Date';
+
+            const options = { month: 'short', day: 'numeric' };
+            return date.toLocaleDateString('en-US', options);
+        }
+
+        // Get date key for grouping
+        function getDateKey(dateStr) {
+            const date = parseDate(dateStr);
+            if (date.getTime() === 0) return dateStr || 'no-date';
+            return date.toISOString().split('T')[0];
+        }
+
+        // Check if item is recent (within 48 hours)
+        function isRecent(dateStr) {
+            const itemDate = parseDate(dateStr);
+            if (itemDate.getTime() === 0) return false;
+            const now = new Date();
+            const hoursDiff = (now - itemDate) / (1000 * 60 * 60);
+            return hoursDiff >= 0 && hoursDiff <= 48;
+        }
+
+        // Get NEW badge HTML
+        function getNewBadge(dateStr) {
+            if (isRecent(dateStr)) {
+                return `<span class="new-badge"><i class="fas fa-sparkles"></i> NEW</span>`;
+            }
+            return '';
+        }
+
+        // Current search term
+        let currentSearchTerm = '';
+
+        // Render resources table
+        function renderResourcesTable(subject, searchTerm = '') {
+            const container = document.getElementById('resources-container');
+            currentSearchTerm = searchTerm.toLowerCase().trim();
+
+            // Filter data by subject
+            let filteredData = allResourcesData.filter(item => item.subject === subject);
+
+            // Apply search filter if present
+            if (currentSearchTerm) {
+                filteredData = filteredData.filter(item =>
+                    (item.topic || '').toLowerCase().includes(currentSearchTerm) ||
+                    (item.assignment || '').toLowerCase().includes(currentSearchTerm)
+                );
+            }
+
+            // Group by date
+            const dateMap = new Map();
+
+            filteredData.forEach(item => {
+                const dateKey = getDateKey(item.date);
+                if (!dateMap.has(dateKey)) {
+                    dateMap.set(dateKey, { date: item.date, items: [] });
+                }
+                dateMap.get(dateKey).items.push(item);
+            });
+
+            // Convert to array and sort by date (newest first)
+            const sortedDates = Array.from(dateMap.values()).sort((a, b) => {
+                return parseDate(b.date) - parseDate(a.date);
+            });
+
+            if (sortedDates.length === 0) {
+                const emptyMessage = currentSearchTerm
+                    ? `No results found for "${escapeHtml(currentSearchTerm)}" in ${subject}`
+                    : `No resources available for ${subject} yet`;
+
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">
+                            <i class="fas ${currentSearchTerm ? 'fa-search' : 'fa-folder-open'}"></i>
+                        </div>
+                        <h3>${currentSearchTerm ? 'No Results Found' : 'No Resources Yet'}</h3>
+                        <p>${emptyMessage}</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Render table
+            let html = `
+                <table class="resources-table">
+                    <thead>
+                        <tr>
+                            <th><i class="fas fa-calendar-alt"></i> Date</th>
+                            <th><i class="fas fa-file-alt"></i> Class Notes</th>
+                            <th><i class="fas fa-tasks"></i> Assignment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            sortedDates.forEach(dayData => {
+                const maxRows = dayData.items.length;
+
+                dayData.items.forEach((item, i) => {
+                    const isFirstRow = i === 0;
+
+                    html += `<tr data-date="${formatDate(dayData.date)}">`;
+
+                    // Date column for desktop (with rowspan) - only on first row
+                    if (isFirstRow) {
+                        html += `
+                            <td class="date-cell desktop-date" ${maxRows > 1 ? `rowspan="${maxRows}"` : ''}>
+                                <i class="fas fa-calendar-alt"></i>
+                                ${formatDate(dayData.date)}
+                            </td>
+                        `;
+                    }
+
+                    // Mobile date cell - shown for every row on mobile
+                    html += `
+                        <td class="date-cell mobile-date">
+                            <i class="fas fa-calendar-alt"></i>
+                            ${formatDate(dayData.date)}
+                        </td>
+                    `;
+
+                    // Class column
+                    html += `<td>`;
+                    if (item.topic) {
+                        html += `
+                            <div class="resource-title">
+                                ${escapeHtml(item.topic) || 'Untitled'}
+                                ${getNewBadge(item.date)}
+                            </div>
+                            <a href="${formatUrl(item['topic link'])}" target="_blank" rel="noopener noreferrer" 
+                               class="resource-link ${!item['topic link'] ? 'disabled' : ''}">
+                                <i class="fas fa-file-alt"></i> View Notes
+                            </a>
+                        `;
+                    } else {
+                        html += `<span class="no-resource">—</span>`;
+                    }
+                    html += `</td>`;
+
+                    // Assignment column
+                    html += `<td>`;
+                    if (item.assignment) {
+                        html += `
+                            <div class="resource-title">
+                                ${escapeHtml(item.assignment) || 'Untitled'}
+                                ${getNewBadge(item.date)}
+                            </div>
+                            <a href="${formatUrl(item['assignment link'])}" target="_blank" rel="noopener noreferrer" 
+                               class="resource-link ${!item['assignment link'] ? 'disabled' : ''}">
+                                <i class="fas fa-external-link-alt"></i> View Assignment
+                            </a>
+                        `;
+                    } else {
+                        html += `<span class="no-resource">—</span>`;
+                    }
+                    html += `</td>`;
+
+                    html += `</tr>`;
+                });
+            });
+
+            html += `
+                    </tbody>
+                </table>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        // Format URL - ensure it's an absolute URL
+        function formatUrl(url) {
+            if (!url) return '#';
+            url = url.trim();
+            // If already has protocol, return as-is
+            if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('//')) {
+                return url;
+            }
+            // Add https:// if no protocol
+            return 'https://' + url;
+        }
+
+        // Escape HTML to prevent XSS
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Show error state
+        function showError(containerId) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = `
+                <div class="error-state">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p>Failed to load data. Please refresh the page.</p>
+                </div>
+            `;
+        }
+
+        // Setup tab filtering
+        function setupTabs() {
+            document.querySelectorAll('#subject-tabs .subject-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('#subject-tabs .subject-tab').forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    const subject = tab.dataset.subject;
+                    const searchInput = document.getElementById('search-input');
+                    renderResourcesTable(subject, searchInput ? searchInput.value : '');
+                });
+            });
+        }
+
+        // Setup search functionality
+        function setupSearch() {
+            const searchInput = document.getElementById('search-input');
+            const searchClear = document.getElementById('search-clear');
+            let debounceTimer;
+
+            if (!searchInput) return;
+
+            // Update clear button visibility
+            function updateClearButton() {
+                if (searchClear) {
+                    searchClear.classList.toggle('visible', searchInput.value.length > 0);
+                }
+            }
+
+            // Search input handler with debounce
+            searchInput.addEventListener('input', () => {
+                updateClearButton();
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => {
+                    const activeTab = document.querySelector('#subject-tabs .subject-tab.active');
+                    const subject = activeTab ? activeTab.dataset.subject : 'Maths';
+                    renderResourcesTable(subject, searchInput.value);
+                }, 300);
+            });
+
+            // Clear button handler
+            if (searchClear) {
+                searchClear.addEventListener('click', () => {
+                    searchInput.value = '';
+                    updateClearButton();
+                    const activeTab = document.querySelector('#subject-tabs .subject-tab.active');
+                    const subject = activeTab ? activeTab.dataset.subject : 'Maths';
+                    renderResourcesTable(subject, '');
+                    searchInput.focus();
+                });
+            }
+        }
+
+        // Mobile menu toggle
+        const menuToggle = document.querySelector('.mobile-menu-toggle');
+        const nav = document.querySelector('nav');
+
+        menuToggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+        });
+
+        // Back to top button
+        const backToTopBtn = document.getElementById('back-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            setupTabs();
+            setupSearch();
+            fetchAllData();
+        });
+    </script>
+</body>
+
+</html>
