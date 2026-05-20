@@ -16,6 +16,16 @@
         content="Crash Course Resources - Access class notes and assignments for Maths, Physics, Chemistry, and Biology at SRSMA.">
     <title>Crash Course Resources | SRSMA</title>
 
+    <script>
+        // Check for saved theme preference, default to dark
+        const theme = localStorage.getItem('theme') || 'dark';
+        if (theme === 'light') {
+            document.documentElement.classList.add('light-mode');
+        } else {
+            document.documentElement.classList.remove('light-mode');
+        }
+    </script>
+
     <!-- Favicon -->
     <link rel="icon" href="/assets/images/logowhite.jpeg" type="image/jpeg">
     <!-- Google Fonts -->
@@ -29,20 +39,80 @@
 
     <style>
         :root {
-            --primary-color: #0a192f;
-            --secondary-color: #ffc107;
-            --text-color: #333333;
-            --light-text: #ffffff;
-            --background-color: #ffffff;
-            --section-bg: #f4f4f4;
+            /* General font & transition config */
             --font-heading: 'Montserrat', sans-serif;
             --font-body: 'Open Sans', sans-serif;
             --transition: all 0.3s ease;
-            /* Subject Colors */
+
+            /* Subject Colors (always bright) */
             --maths-color: #3b82f6;
             --physics-color: #f97316;
             --chemistry-color: #10b981;
             --biology-color: #8b5cf6;
+
+            /* Dark Mode colors (Default) */
+            --bg-color: #0b0f19;
+            /* Deep space dark */
+            --section-bg: #111827;
+            /* Slate-900 */
+            --card-bg: #1f2937;
+            /* Slate-800 */
+            --text-color: #cbd5e1;
+            /* Slate-300 */
+            --heading-color: #f8fafc;
+            /* Near white */
+            --border-color: #374151;
+            /* Slate-700 border */
+            --table-row-alt: #182232;
+            /* Darker alternate row */
+            --table-row-hover: #243249;
+            /* Glowing hover row */
+            --glass-bg: rgba(31, 41, 55, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --header-bg: #090d16;
+            --footer-bg: #090d16;
+            --hero-bg: radial-gradient(circle at top, #1e293b 0%, #0b0f19 100%);
+            --hero-text: #f8fafc;
+            --secondary-color: #ffc107;
+            /* Accent yellow */
+            --primary-color: #0a192f;
+            /* Kept for some legacy elements or light-mode header */
+            --light-text: #ffffff;
+            --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            --skeleton-base: #1e2937;
+            --skeleton-shimmer: #374151;
+            --search-bg: #1f2937;
+            --search-border: #374151;
+            --search-focus-ring: rgba(255, 193, 7, 0.2);
+            --text-muted: #9ca3af;
+        }
+
+        /* Light Mode Overrides */
+        .light-mode {
+            --bg-color: #ffffff;
+            --section-bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-color: #334155;
+            /* Slate-700 */
+            --heading-color: #0f172a;
+            /* Deep slate-900 */
+            --border-color: #e2e8f0;
+            /* Slate-200 */
+            --table-row-alt: #f8fafc;
+            --table-row-hover: #eef2ff;
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.5);
+            --header-bg: #0a192f;
+            --footer-bg: #0a192f;
+            --hero-bg: #ffffff;
+            --hero-text: #0a192f;
+            --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+            --skeleton-base: #e5e7eb;
+            --skeleton-shimmer: #f3f4f6;
+            --search-bg: #ffffff;
+            --search-border: #e2e8f0;
+            --search-focus-ring: rgba(10, 25, 47, 0.1);
+            --text-muted: #64748b;
         }
 
         * {
@@ -60,7 +130,23 @@
             color: var(--text-color);
             line-height: 1.6;
             overflow-x: hidden;
-            background-color: var(--background-color);
+            background-color: var(--bg-color);
+        }
+
+        /* Smooth transitions for theme toggle */
+        body,
+        .page-hero,
+        .section,
+        .card,
+        .card-header,
+        .resources-table-container,
+        .dashboard-card,
+        .timeline-card,
+        .timeline-node,
+        .search-input,
+        header,
+        footer {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         h1,
@@ -99,7 +185,7 @@
 
         /* Header */
         header {
-            background-color: var(--primary-color);
+            background-color: var(--header-bg);
             color: var(--light-text);
             padding: 0.5rem 0;
             position: sticky;
@@ -181,12 +267,204 @@
             color: var(--light-text);
         }
 
+        /* Header Right Alignment Container */
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        /* Premium Theme Toggle Switch */
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            outline: none;
+            position: relative;
+            width: 60px;
+            height: 30px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+        }
+
+        .theme-toggle .toggle-track {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+            border: 2px solid #334155;
+            border-radius: 30px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.6), 0 0 10px rgba(59, 130, 246, 0.2);
+        }
+
+        .theme-toggle .toggle-indicator {
+            position: absolute;
+            left: 3px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #e2e8f0 0%, #cbd5e1 100%);
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.5), inset -2px -2px 4px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 2;
+        }
+
+        .theme-toggle .icon-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle .moon-icon {
+            font-size: 10px;
+            color: #0f172a;
+            transition: all 0.4s ease;
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .theme-toggle .sun-icon {
+            font-size: 10px;
+            color: #d97706;
+            position: absolute;
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: scale(0) rotate(-45deg);
+        }
+
+        /* Star decorations for dark mode */
+        .theme-toggle .decorations .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            transition: all 0.4s ease;
+        }
+
+        .theme-toggle .decorations .star-1 {
+            width: 2px;
+            height: 2px;
+            top: 8px;
+            right: 12px;
+            animation: toggleBlink 2s infinite 0.5s;
+        }
+
+        .theme-toggle .decorations .star-2 {
+            width: 1.5px;
+            height: 1.5px;
+            top: 17px;
+            right: 20px;
+            animation: toggleBlink 2.5s infinite;
+        }
+
+        .theme-toggle .decorations .star-3 {
+            width: 2px;
+            height: 2px;
+            top: 6px;
+            right: 28px;
+            animation: toggleBlink 3s infinite 1s;
+        }
+
+        @keyframes toggleBlink {
+
+            0%,
+            100% {
+                opacity: 0.2;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        .theme-toggle .decorations .cloud {
+            position: absolute;
+            bottom: -15px;
+            left: 10px;
+            width: 22px;
+            height: 11px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        /* Light Mode Switch Styles */
+        .light-mode .theme-toggle .toggle-track {
+            background: linear-gradient(180deg, #38bdf8 0%, #0ea5e9 100%);
+            border-color: #7dd3fc;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1), 0 0 12px rgba(14, 165, 233, 0.3);
+        }
+
+        .light-mode .theme-toggle .toggle-indicator {
+            left: 33px;
+            background: radial-gradient(circle at 30% 30%, #fef08a 0%, #facc15 100%);
+            box-shadow: 0 0 12px #facc15, inset -1px -1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .light-mode .theme-toggle .moon-icon {
+            opacity: 0;
+            transform: scale(0) rotate(45deg);
+        }
+
+        .light-mode .theme-toggle .sun-icon {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+        }
+
+        .light-mode .theme-toggle .decorations .star {
+            opacity: 0;
+            transform: scale(0);
+        }
+
+        .light-mode .theme-toggle .decorations .cloud {
+            bottom: 2px;
+            left: 6px;
+            opacity: 0.9;
+            transform: translateY(0);
+        }
+
         /* Page Header - Clean White Hero */
         .page-hero {
-            background: white;
-            color: var(--primary-color);
-            padding: 2.5rem 0;
+            position: relative;
+            background: var(--hero-bg);
+            color: var(--hero-text);
+            padding: 3.5rem 0;
             text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+
+        .page-hero .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        #hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        .light-mode #hero-canvas {
+            opacity: 0.1;
         }
 
         .page-hero h1 {
@@ -215,7 +493,7 @@
 
         .page-hero .tagline {
             font-size: 1.1rem;
-            color: #666;
+            color: var(--text-muted);
             margin-top: 1rem;
             animation: fadeInUp 0.6s ease-out 0.2s backwards;
         }
@@ -248,7 +526,7 @@
         .section-title {
             text-align: center;
             font-size: 2rem;
-            color: var(--primary-color);
+            color: var(--heading-color);
             margin-bottom: 2rem;
             position: relative;
         }
@@ -267,88 +545,342 @@
             color: var(--secondary-color);
         }
 
-        /* Subject Tabs */
-        .subject-tabs {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-bottom: 2rem;
+        /* Subject Dashboard Card Grid */
+        .subject-dashboard {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+            width: 100%;
         }
 
-        .subject-tab {
-            padding: 0.8rem 1.8rem;
-            border: none;
-            border-radius: 12px;
-            font-weight: 600;
+        .dashboard-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            background: white;
-            color: var(--text-color);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            box-shadow: var(--card-shadow);
+            position: relative;
+            overflow: hidden;
         }
 
-        .subject-tab:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
         }
 
-        /* Subject-specific colors */
-        .subject-tab[data-subject="Maths"] {
-            color: var(--maths-color);
+        .dashboard-card.active {
+            border-width: 2px;
         }
 
-        .subject-tab[data-subject="Maths"].active {
-            background: var(--maths-color);
-            color: white;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+        /* Color accents for cards when active or hovered */
+        .dashboard-card[data-subject="Maths"].active {
+            border-color: var(--maths-color);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
         }
 
-        .subject-tab[data-subject="Physics"] {
-            color: var(--physics-color);
+        .dashboard-card[data-subject="Physics"].active {
+            border-color: var(--physics-color);
+            box-shadow: 0 0 20px rgba(249, 115, 22, 0.2);
         }
 
-        .subject-tab[data-subject="Physics"].active {
-            background: var(--physics-color);
-            color: white;
-            box-shadow: 0 4px 15px rgba(249, 115, 22, 0.4);
+        .dashboard-card[data-subject="Chemistry"].active {
+            border-color: var(--chemistry-color);
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
         }
 
-        .subject-tab[data-subject="Chemistry"] {
-            color: var(--chemistry-color);
+        .dashboard-card[data-subject="Biology"].active {
+            border-color: var(--biology-color);
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
         }
 
-        .subject-tab[data-subject="Chemistry"].active {
-            background: var(--chemistry-color);
-            color: white;
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+        .dashboard-card .card-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
         }
 
-        .subject-tab[data-subject="Biology"] {
-            color: var(--biology-color);
+        .dashboard-card .subject-title {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.15rem;
+            color: var(--heading-color);
         }
 
-        .subject-tab[data-subject="Biology"].active {
-            background: var(--biology-color);
-            color: white;
-            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+        .dashboard-card .resources-count {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 600;
         }
 
-        .subject-tab i {
-            margin-right: 0.5rem;
+        /* Progress Ring Styling */
+        .progress-ring-container {
+            position: relative;
+            width: 54px;
+            height: 54px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .progress-ring {
+            transform: rotate(-90deg);
+            width: 54px;
+            height: 54px;
+        }
+
+        .progress-ring-bg {
+            fill: transparent;
+            stroke: var(--border-color);
+            stroke-width: 4px;
+        }
+
+        .progress-ring-circle {
+            fill: transparent;
+            stroke-width: 4px;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 0.6s ease;
+        }
+
+        /* Subject-specific ring colors */
+        .dashboard-card[data-subject="Maths"] .progress-ring-circle {
+            stroke: var(--maths-color);
+        }
+
+        .dashboard-card[data-subject="Physics"] .progress-ring-circle {
+            stroke: var(--physics-color);
+        }
+
+        .dashboard-card[data-subject="Chemistry"] .progress-ring-circle {
+            stroke: var(--chemistry-color);
+        }
+
+        .dashboard-card[data-subject="Biology"] .progress-ring-circle {
+            stroke: var(--biology-color);
+        }
+
+        .subject-icon-overlay {
+            position: absolute;
             font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .dashboard-card:hover .subject-icon-overlay {
+            transform: scale(1.15);
+        }
+
+        /* Responsive Dashboard Grid */
+        @media (max-width: 992px) {
+            .subject-dashboard {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .subject-dashboard {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+        }
+
+        /* Timeline Container */
+        .timeline-container {
+            position: relative;
+            padding: 1.5rem 0;
+            margin: 0 auto;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        /* The vertical line */
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 20px;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--secondary-color) 0%, var(--border-color) 100%);
+            border-radius: 4px;
+        }
+
+        /* Timeline Item */
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2.5rem;
+            padding-left: 50px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: timelineFadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes timelineFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Timeline Node Dot */
+        .timeline-node {
+            position: absolute;
+            left: 11px;
+            top: 5px;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--bg-color);
+            border: 4px solid var(--secondary-color);
+            z-index: 2;
+            box-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover .timeline-node {
+            background: var(--secondary-color);
+            transform: scale(1.2);
+            box-shadow: 0 0 15px var(--secondary-color);
+        }
+
+        /* Timeline Date Header */
+        .timeline-date {
+            font-family: var(--font-heading);
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--heading-color);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .timeline-date i {
+            color: var(--secondary-color);
+        }
+
+        /* Timeline Unified Glassmorphic Card */
+        .timeline-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
+            padding: 1.5rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .timeline-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Card sections for Notes and Assignments */
+        .timeline-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 0.5rem;
+        }
+
+        /* Separator between section columns */
+        .timeline-section:first-child {
+            border-right: 1px solid var(--border-color);
+            padding-right: 1.5rem;
+        }
+
+        .timeline-section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            font-weight: 700;
+        }
+
+        .timeline-section-header i {
+            font-size: 1rem;
+        }
+
+        /* Resource Content */
+        .timeline-resource-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .timeline-resource-title {
+            font-family: var(--font-heading);
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--heading-color);
+            line-height: 1.4;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        /* Empty state placeholders */
+        .timeline-empty {
+            color: var(--text-muted);
+            font-style: italic;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            height: 100%;
+        }
+
+        /* Button alignment */
+        .timeline-section .resource-link {
+            width: fit-content;
+            padding: 0.6rem 1.25rem;
+        }
+
+        /* Responsive Timeline styles */
+        @media (max-width: 768px) {
+            .timeline-card {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .timeline-section:first-child {
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+                padding-right: 0.5rem;
+                padding-bottom: 1.5rem;
+            }
+
+            .timeline-section .resource-link {
+                width: 100%;
+            }
         }
 
         /* Glassmorphism Table Container */
         .resources-table-container {
             overflow-x: auto;
             animation: fadeIn 0.5s ease-out;
-            background: rgba(255, 255, 255, 0.85);
+            background: var(--glass-bg);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--card-shadow);
             padding: 0.5rem;
         }
 
@@ -362,18 +894,19 @@
         .search-input {
             width: 100%;
             padding: 1rem 1.5rem 1rem 3rem;
-            border: 2px solid #e5e7eb;
+            border: 2px solid var(--search-border);
             border-radius: 50px;
             font-size: 1rem;
             font-family: var(--font-body);
             transition: all 0.3s ease;
-            background: white;
+            background: var(--search-bg);
+            color: var(--text-color);
         }
 
         .search-input:focus {
             outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 4px rgba(10, 25, 47, 0.1);
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 4px var(--search-focus-ring);
         }
 
         .search-input::placeholder {
@@ -420,17 +953,17 @@
 
         /* Card Styles */
         .card {
-            background: white;
+            background: var(--card-bg);
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            box-shadow: var(--card-shadow);
             overflow: hidden;
             transition: var(--transition);
-            border: 1px solid #eee;
+            border: 1px solid var(--border-color);
         }
 
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+            box-shadow: var(--card-shadow);
         }
 
         .card-header {
@@ -467,7 +1000,7 @@
 
         .card-title {
             font-size: 1.1rem;
-            color: var(--primary-color);
+            color: var(--heading-color);
             margin-bottom: 1rem;
             line-height: 1.4;
         }
@@ -499,14 +1032,14 @@
 
         /* Skeleton Loading */
         .skeleton-card {
-            background: white;
+            background: var(--card-bg);
             border-radius: 12px;
             overflow: hidden;
-            border: 1px solid #eee;
+            border: 1px solid var(--border-color);
         }
 
         .skeleton-header {
-            background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+            background: linear-gradient(90deg, var(--skeleton-base) 25%, var(--skeleton-shimmer) 50%, var(--skeleton-base) 75%);
             background-size: 200% 100%;
             animation: shimmer 1.5s infinite;
             height: 60px;
@@ -517,7 +1050,7 @@
         }
 
         .skeleton-line {
-            background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+            background: linear-gradient(90deg, var(--skeleton-base) 25%, var(--skeleton-shimmer) 50%, var(--skeleton-base) 75%);
             background-size: 200% 100%;
             animation: shimmer 1.5s infinite;
             border-radius: 4px;
@@ -549,7 +1082,7 @@
         .empty-state {
             text-align: center;
             padding: 4rem 2rem;
-            color: #666;
+            color: var(--text-muted);
             animation: fadeIn 0.5s ease-out;
         }
 
@@ -557,7 +1090,7 @@
             width: 120px;
             height: 120px;
             margin: 0 auto 1.5rem;
-            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+            background: linear-gradient(135deg, var(--section-bg) 0%, var(--border-color) 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -578,18 +1111,18 @@
 
         .empty-state-icon i {
             font-size: 3rem;
-            color: #9ca3af;
+            color: var(--text-muted);
         }
 
         .empty-state h3 {
             font-size: 1.25rem;
-            color: var(--primary-color);
+            color: var(--heading-color);
             margin-bottom: 0.5rem;
         }
 
         .empty-state p {
             font-size: 1rem;
-            color: #6b7280;
+            color: var(--text-muted);
             max-width: 300px;
             margin: 0 auto;
         }
@@ -629,10 +1162,10 @@
         .resources-table {
             width: 100%;
             border-collapse: collapse;
-            background: white;
+            background: var(--card-bg);
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            box-shadow: var(--card-shadow);
         }
 
         .resources-table thead {
@@ -654,7 +1187,7 @@
         }
 
         .resources-table tbody tr {
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid var(--border-color);
             transition: all 0.3s ease;
             animation: tableRowFadeIn 0.4s ease-out backwards;
         }
@@ -706,13 +1239,13 @@
 
         /* Alternating row colors */
         .resources-table tbody tr:nth-child(even) {
-            background-color: #f8fafc;
+            background-color: var(--table-row-alt);
         }
 
         .resources-table tbody tr:hover {
-            background-color: #eef2ff;
+            background-color: var(--table-row-hover);
             transform: scale(1.005);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
         }
 
         .resources-table tbody tr:last-child {
@@ -726,9 +1259,9 @@
 
         .resources-table .date-cell {
             font-weight: 600;
-            color: var(--primary-color);
+            color: var(--heading-color);
             white-space: nowrap;
-            background: linear-gradient(135deg, rgba(10, 25, 47, 0.03) 0%, transparent 100%);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, transparent 100%);
         }
 
         .resources-table .date-cell i {
@@ -772,7 +1305,7 @@
 
         .resource-title {
             font-size: 0.9rem;
-            color: #666;
+            color: var(--text-color);
             margin-bottom: 0.35rem;
             display: flex;
             align-items: center;
@@ -819,10 +1352,10 @@
 
         /* Skeleton Table */
         .skeleton-table {
-            background: white;
+            background: var(--card-bg);
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            box-shadow: var(--card-shadow);
             padding: 1rem;
         }
 
@@ -851,7 +1384,7 @@
 
         /* Footer */
         footer {
-            background-color: var(--primary-color);
+            background-color: var(--footer-bg);
             color: var(--light-text);
             padding: 4rem 0 2rem;
         }
@@ -1013,23 +1546,23 @@
             .resources-table tbody tr {
                 display: flex;
                 flex-direction: column;
-                background: white;
+                background: var(--card-bg);
                 border-radius: 12px;
-                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-                border: 1px solid #eee;
+                box-shadow: var(--card-shadow);
+                border: 1px solid var(--border-color);
                 overflow: hidden;
                 animation: none;
             }
 
             .resources-table tbody tr:hover {
                 transform: none;
-                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+                box-shadow: var(--card-shadow);
             }
 
             .resources-table td {
                 display: block;
                 padding: 1rem;
-                border-bottom: 1px solid #f0f0f0;
+                border-bottom: 1px solid var(--border-color);
             }
 
             .resources-table td:last-child {
@@ -1037,7 +1570,7 @@
             }
 
             .resources-table .date-cell {
-                background: linear-gradient(135deg, var(--primary-color) 0%, #1e3a5f 100%);
+                background: linear-gradient(135deg, var(--header-bg) 0%, #1e3a5f 100%);
                 color: white;
                 font-size: 0.95rem;
                 padding: 0.75rem 1rem;
@@ -1064,7 +1597,7 @@
                 font-size: 0.75rem;
                 text-transform: uppercase;
                 letter-spacing: 0.5px;
-                color: #6b7280;
+                color: var(--text-muted);
                 margin-bottom: 0.5rem;
             }
 
@@ -1139,23 +1672,45 @@
                 </a>
                 <div class="logo-text">Shri Ram Smart Minds Academy</div>
             </div>
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/#courses">Courses</a></li>
-                    <li><a href="/#faculty">Faculty</a></li>
-                    <li><a href="/#contact">Contact Us</a></li>
-                </ul>
-                <a href="/talk-to-us.html" class="cta-button">Talk to Us</a>
-            </nav>
-            <div class="mobile-menu-toggle">
-                <i class="fas fa-bars"></i>
+            <div class="header-right">
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/#courses">Courses</a></li>
+                        <li><a href="/#faculty">Faculty</a></li>
+                        <li><a href="/#contact">Contact Us</a></li>
+                    </ul>
+                    <a href="/talk-to-us.html" class="cta-button">Talk to Us</a>
+                </nav>
+
+                <!-- Theme Toggle Switch -->
+                <button id="theme-toggle" class="theme-toggle" aria-label="Switch to light mode">
+                    <div class="toggle-track">
+                        <div class="toggle-indicator">
+                            <div class="icon-wrapper">
+                                <i class="fas fa-moon moon-icon"></i>
+                                <i class="fas fa-sun sun-icon"></i>
+                            </div>
+                        </div>
+                        <div class="decorations">
+                            <div class="star star-1"></div>
+                            <div class="star star-2"></div>
+                            <div class="star star-3"></div>
+                            <div class="cloud"></div>
+                        </div>
+                    </div>
+                </button>
+
+                <div class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
             </div>
         </div>
     </header>
 
     <!-- Page Header -->
     <section class="page-hero">
+        <canvas id="hero-canvas"></canvas>
         <div class="container">
             <h1><i class="fas fa-book-open"></i> Crash Course Resources</h1>
             <p class="tagline">Access your daily class notes and assignments in one place</p>
@@ -1175,27 +1730,107 @@
                 </button>
             </div>
 
-            <div class="subject-tabs" id="subject-tabs">
-                <button class="subject-tab active" data-subject="Maths"><i class="fas fa-calculator"></i> Maths</button>
-                <button class="subject-tab" data-subject="Physics"><i class="fas fa-atom"></i> Physics</button>
-                <button class="subject-tab" data-subject="Chemistry"><i class="fas fa-flask"></i> Chemistry</button>
-                <button class="subject-tab" data-subject="Biology"><i class="fas fa-dna"></i> Biology</button>
+            <div class="subject-dashboard" id="subject-dashboard">
+                <!-- Maths Widget -->
+                <div class="dashboard-card active" data-subject="Maths">
+                    <div class="card-info">
+                        <span class="subject-title">Maths</span>
+                        <span class="resources-count"><span id="progress-maths-text">0</span> Resources</span>
+                    </div>
+                    <div class="progress-ring-container">
+                        <svg class="progress-ring" width="54" height="54">
+                            <circle class="progress-ring-bg" cx="27" cy="27" r="22" />
+                            <circle class="progress-ring-circle" id="progress-maths" cx="27" cy="27" r="22"
+                                stroke-dasharray="138.2" stroke-dashoffset="138.2" />
+                        </svg>
+                        <i class="fas fa-calculator subject-icon-overlay" style="color: var(--maths-color);"></i>
+                    </div>
+                </div>
+                <!-- Physics Widget -->
+                <div class="dashboard-card" data-subject="Physics">
+                    <div class="card-info">
+                        <span class="subject-title">Physics</span>
+                        <span class="resources-count"><span id="progress-physics-text">0</span> Resources</span>
+                    </div>
+                    <div class="progress-ring-container">
+                        <svg class="progress-ring" width="54" height="54">
+                            <circle class="progress-ring-bg" cx="27" cy="27" r="22" />
+                            <circle class="progress-ring-circle" id="progress-physics" cx="27" cy="27" r="22"
+                                stroke-dasharray="138.2" stroke-dashoffset="138.2" />
+                        </svg>
+                        <i class="fas fa-atom subject-icon-overlay" style="color: var(--physics-color);"></i>
+                    </div>
+                </div>
+                <!-- Chemistry Widget -->
+                <div class="dashboard-card" data-subject="Chemistry">
+                    <div class="card-info">
+                        <span class="subject-title">Chemistry</span>
+                        <span class="resources-count"><span id="progress-chemistry-text">0</span> Resources</span>
+                    </div>
+                    <div class="progress-ring-container">
+                        <svg class="progress-ring" width="54" height="54">
+                            <circle class="progress-ring-bg" cx="27" cy="27" r="22" />
+                            <circle class="progress-ring-circle" id="progress-chemistry" cx="27" cy="27" r="22"
+                                stroke-dasharray="138.2" stroke-dashoffset="138.2" />
+                        </svg>
+                        <i class="fas fa-flask subject-icon-overlay" style="color: var(--chemistry-color);"></i>
+                    </div>
+                </div>
+                <!-- Biology Widget -->
+                <div class="dashboard-card" data-subject="Biology">
+                    <div class="card-info">
+                        <span class="subject-title">Biology</span>
+                        <span class="resources-count"><span id="progress-biology-text">0</span> Resources</span>
+                    </div>
+                    <div class="progress-ring-container">
+                        <svg class="progress-ring" width="54" height="54">
+                            <circle class="progress-ring-bg" cx="27" cy="27" r="22" />
+                            <circle class="progress-ring-circle" id="progress-biology" cx="27" cy="27" r="22"
+                                stroke-dasharray="138.2" stroke-dashoffset="138.2" />
+                        </svg>
+                        <i class="fas fa-dna subject-icon-overlay" style="color: var(--biology-color);"></i>
+                    </div>
+                </div>
             </div>
 
             <div class="resources-table-container" id="resources-container">
                 <!-- Skeleton loading -->
-                <div class="skeleton-table">
-                    <div class="skeleton-row">
-                        <div class="skeleton-line" style="width: 100%; height: 50px;"></div>
+                <div class="timeline-container" style="opacity: 0.6; pointer-events: none;">
+                    <div class="timeline-item" style="animation: none;">
+                        <div class="timeline-node" style="border-color: var(--border-color);"></div>
+                        <div class="timeline-date">
+                            <div class="skeleton-line" style="width: 100px; height: 16px;"></div>
+                        </div>
+                        <div class="timeline-card">
+                            <div class="timeline-section">
+                                <div class="skeleton-line" style="width: 40%; height: 12px; margin-bottom: 8px;"></div>
+                                <div class="skeleton-line" style="width: 80%; height: 18px; margin-bottom: 12px;"></div>
+                                <div class="skeleton-line" style="width: 90px; height: 32px; border-radius: 6px;"></div>
+                            </div>
+                            <div class="timeline-section">
+                                <div class="skeleton-line" style="width: 40%; height: 12px; margin-bottom: 8px;"></div>
+                                <div class="skeleton-line" style="width: 80%; height: 18px; margin-bottom: 12px;"></div>
+                                <div class="skeleton-line" style="width: 90px; height: 32px; border-radius: 6px;"></div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="skeleton-row">
-                        <div class="skeleton-line" style="width: 100%; height: 70px;"></div>
-                    </div>
-                    <div class="skeleton-row">
-                        <div class="skeleton-line" style="width: 100%; height: 70px;"></div>
-                    </div>
-                    <div class="skeleton-row">
-                        <div class="skeleton-line" style="width: 100%; height: 70px;"></div>
+                    <div class="timeline-item" style="animation: none; margin-top: 2rem;">
+                        <div class="timeline-node" style="border-color: var(--border-color);"></div>
+                        <div class="timeline-date">
+                            <div class="skeleton-line" style="width: 100px; height: 16px;"></div>
+                        </div>
+                        <div class="timeline-card">
+                            <div class="timeline-section">
+                                <div class="skeleton-line" style="width: 40%; height: 12px; margin-bottom: 8px;"></div>
+                                <div class="skeleton-line" style="width: 80%; height: 18px; margin-bottom: 12px;"></div>
+                                <div class="skeleton-line" style="width: 90px; height: 32px; border-radius: 6px;"></div>
+                            </div>
+                            <div class="timeline-section">
+                                <div class="skeleton-line" style="width: 40%; height: 12px; margin-bottom: 8px;"></div>
+                                <div class="skeleton-line" style="width: 80%; height: 18px; margin-bottom: 12px;"></div>
+                                <div class="skeleton-line" style="width: 90px; height: 32px; border-radius: 6px;"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1242,7 +1877,7 @@
 
     <script>
         // Configuration
-        const SHEET_ID = '1kCmbxgXCg-EVnChCfJgzQmme8EPxmAg7f86XTfWAyxo';
+        const SHEET_ID = '  ';
         const CLASS_TABS = ['MathsClass', 'PhysicsClass', 'ChemistryClass', 'BiologyClass'];
         const ASSIGNMENT_TABS = ['MathsAssignment', 'PhysicsAssignment', 'ChemistryAssignment', 'BiologyAssignment'];
 
@@ -1375,7 +2010,7 @@
         // Update progress indicators
         function updateProgressIndicators() {
             const subjects = ['Maths', 'Physics', 'Chemistry', 'Biology'];
-            const circumference = 94.2; // 2 * PI * 15
+            const circumference = 138.2; // 2 * PI * 22
 
             subjects.forEach(subject => {
                 const classCount = classesData.filter(item => item.subject === subject).length;
@@ -1471,7 +2106,7 @@
         // Current search term
         let currentSearchTerm = '';
 
-        // Render resources table
+        // Render timeline resources
         function renderResourcesTable(subject, searchTerm = '') {
             const container = document.getElementById('resources-container');
             currentSearchTerm = searchTerm.toLowerCase().trim();
@@ -1533,53 +2168,33 @@
                 return;
             }
 
-            // Render table
-            let html = `
-                <table class="resources-table">
-                    <thead>
-                        <tr>
-                            <th><i class="fas fa-calendar-alt"></i> Date</th>
-                            <th><i class="fas fa-file-alt"></i> Class Notes</th>
-                            <th><i class="fas fa-tasks"></i> Assignment</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-            `;
+            // Render Timeline
+            let html = `<div class="timeline-container">`;
 
-            sortedDates.forEach(dayData => {
-                const maxRows = Math.max(dayData.classes.length, dayData.assignments.length, 1);
+            sortedDates.forEach((dayData, index) => {
+                const dateString = formatDate(dayData.date);
+                const animDelay = `${index * 0.1}s`;
 
-                for (let i = 0; i < maxRows; i++) {
-                    const classItem = dayData.classes[i];
-                    const assignmentItem = dayData.assignments[i];
-                    const isFirstRow = i === 0;
+                html += `
+                    <div class="timeline-item" style="animation-delay: ${animDelay};">
+                        <div class="timeline-node"></div>
+                        <div class="timeline-date">
+                            <i class="fas fa-calendar-day"></i> ${dateString}
+                        </div>
+                        <div class="timeline-card">
+                            <!-- Class Notes Section -->
+                            <div class="timeline-section">
+                                <div class="timeline-section-header">
+                                    <i class="fas fa-book-reader" style="color: var(--primary-color);"></i> Class Notes
+                                </div>
+                                <div class="timeline-resource-content">
+                `;
 
-                    html += `<tr data-date="${formatDate(dayData.date)}">`;
-
-                    // Date column for desktop (with rowspan) - only on first row
-                    if (isFirstRow) {
+                if (dayData.classes.length > 0) {
+                    dayData.classes.forEach(classItem => {
                         html += `
-                            <td class="date-cell desktop-date" ${maxRows > 1 ? `rowspan="${maxRows}"` : ''}>
-                                <i class="fas fa-calendar-alt"></i>
-                                ${formatDate(dayData.date)}
-                            </td>
-                        `;
-                    }
-
-                    // Mobile date cell - shown for every row on mobile
-                    html += `
-                        <td class="date-cell mobile-date">
-                            <i class="fas fa-calendar-alt"></i>
-                            ${formatDate(dayData.date)}
-                        </td>
-                    `;
-
-                    // Class column
-                    html += `<td>`;
-                    if (classItem) {
-                        html += `
-                            <div class="resource-title">
-                                ${escapeHtml(classItem.name) || 'Untitled'}
+                            <div class="timeline-resource-title">
+                                ${escapeHtml(classItem.name) || 'Untitled Notes'}
                                 ${getNewBadge(classItem.date)}
                             </div>
                             <a href="${formatUrl(classItem.link)}" target="_blank" rel="noopener noreferrer" 
@@ -1587,17 +2202,32 @@
                                 <i class="fas fa-file-alt"></i> View Notes
                             </a>
                         `;
-                    } else {
-                        html += `<span class="no-resource">—</span>`;
-                    }
-                    html += `</td>`;
+                    });
+                } else {
+                    html += `
+                        <div class="timeline-empty">
+                            <i class="fas fa-info-circle"></i> No notes uploaded
+                        </div>
+                    `;
+                }
 
-                    // Assignment column
-                    html += `<td>`;
-                    if (assignmentItem) {
+                html += `
+                                </div>
+                            </div>
+                            
+                            <!-- Assignments Section -->
+                            <div class="timeline-section">
+                                <div class="timeline-section-header">
+                                    <i class="fas fa-pencil-alt" style="color: var(--secondary-color);"></i> Assignment
+                                </div>
+                                <div class="timeline-resource-content">
+                `;
+
+                if (dayData.assignments.length > 0) {
+                    dayData.assignments.forEach(assignmentItem => {
                         html += `
-                            <div class="resource-title">
-                                ${escapeHtml(assignmentItem.name) || 'Untitled'}
+                            <div class="timeline-resource-title">
+                                ${escapeHtml(assignmentItem.name) || 'Untitled Assignment'}
                                 ${getNewBadge(assignmentItem.date)}
                             </div>
                             <a href="${formatUrl(assignmentItem.link)}" target="_blank" rel="noopener noreferrer" 
@@ -1605,20 +2235,24 @@
                                 <i class="fas fa-external-link-alt"></i> View Assignment
                             </a>
                         `;
-                    } else {
-                        html += `<span class="no-resource">—</span>`;
-                    }
-                    html += `</td>`;
-
-                    html += `</tr>`;
+                    });
+                } else {
+                    html += `
+                        <div class="timeline-empty">
+                            <i class="fas fa-info-circle"></i> No assignments uploaded
+                        </div>
+                    `;
                 }
+
+                html += `
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
             });
 
-            html += `
-                    </tbody>
-                </table>
-            `;
-
+            html += `</div>`;
             container.innerHTML = html;
         }
 
@@ -1655,13 +2289,18 @@
 
         // Setup tab filtering
         function setupTabs() {
-            document.querySelectorAll('#subject-tabs .subject-tab').forEach(tab => {
+            document.querySelectorAll('#subject-dashboard .dashboard-card').forEach(tab => {
                 tab.addEventListener('click', () => {
-                    document.querySelectorAll('#subject-tabs .subject-tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('#subject-dashboard .dashboard-card').forEach(t => t.classList.remove('active'));
                     tab.classList.add('active');
                     const subject = tab.dataset.subject;
                     const searchInput = document.getElementById('search-input');
                     renderResourcesTable(subject, searchInput ? searchInput.value : '');
+
+                    // Update canvas particles to match active subject
+                    if (typeof window.updateCanvasSubject === 'function') {
+                        window.updateCanvasSubject(subject);
+                    }
                 });
             });
         }
@@ -1686,7 +2325,7 @@
                 updateClearButton();
                 clearTimeout(debounceTimer);
                 debounceTimer = setTimeout(() => {
-                    const activeTab = document.querySelector('#subject-tabs .subject-tab.active');
+                    const activeTab = document.querySelector('#subject-dashboard .dashboard-card.active');
                     const subject = activeTab ? activeTab.dataset.subject : 'Maths';
                     renderResourcesTable(subject, searchInput.value);
                 }, 300);
@@ -1697,7 +2336,7 @@
                 searchClear.addEventListener('click', () => {
                     searchInput.value = '';
                     updateClearButton();
-                    const activeTab = document.querySelector('#subject-tabs .subject-tab.active');
+                    const activeTab = document.querySelector('#subject-dashboard .dashboard-card.active');
                     const subject = activeTab ? activeTab.dataset.subject : 'Maths';
                     renderResourcesTable(subject, '');
                     searchInput.focus();
@@ -1731,8 +2370,184 @@
             });
         });
 
+        // Theme toggler setup
+        function setupTheme() {
+            const themeToggle = document.getElementById('theme-toggle');
+            if (!themeToggle) return;
+
+            function syncToggleUI() {
+                const isLight = document.documentElement.classList.contains('light-mode');
+                themeToggle.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
+            }
+
+            syncToggleUI();
+
+            themeToggle.addEventListener('click', () => {
+                const isLight = document.documentElement.classList.contains('light-mode');
+                if (isLight) {
+                    document.documentElement.classList.remove('light-mode');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    document.documentElement.classList.add('light-mode');
+                    localStorage.setItem('theme', 'light');
+                }
+                syncToggleUI();
+            });
+        }
+
+        // Interactive Physics Particle Canvas
+        function setupHeroCanvas() {
+            const canvas = document.getElementById('hero-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+
+            let width = canvas.offsetWidth;
+            let height = canvas.offsetHeight;
+            canvas.width = width;
+            canvas.height = height;
+
+            // Handle window resizing
+            window.addEventListener('resize', () => {
+                width = canvas.offsetWidth;
+                height = canvas.offsetHeight;
+                canvas.width = width;
+                canvas.height = height;
+            });
+
+            // Symbols/Characters based on subjects
+            const symbolPacks = {
+                'Maths': ['+', '−', '×', '÷', '∑', '√', 'x', 'y', 'π', 'Δ', '∫', 'dy/dx', 'sin', 'cos', 'tan', 'log', 'θ', '∞'],
+                'Physics': ['λ', 'Ω', 'F', 'a', 'v', 'E', 'mc²', 'h', 'G', 'c', 'J', 'W', 'eV', 'Hz', 'μ', 'Φ', 'Ψ'],
+                'Chemistry': ['H₂O', 'CO₂', 'NaCl', 'C', 'O', 'N', 'H', 'Fe', 'Au', 'acid', 'base', 'mol', 'pH', 'Cu', 'Ag', 'Zn'],
+                'Biology': ['DNA', 'cell', 'gene', 'RNA', 'leaf', 'organ', 'heart', 'brain', 'phylo', 'bio', 'eco', 'species']
+            };
+
+            // Colors mapping matching subject themes
+            const subjectColors = {
+                'Maths': '#3b82f6',      // Blue
+                'Physics': '#f97316',    // Orange
+                'Chemistry': '#10b981',  // Green
+                'Biology': '#8b5cf6'     // Violet
+            };
+
+            let activeSubject = 'Maths';
+            let particles = [];
+            const particleCount = 35; // Kept low for CPU efficiency and clean readability
+
+            class Particle {
+                constructor() {
+                    this.reset();
+                    // Distribute starting positions across canvas
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * height;
+                }
+
+                reset() {
+                    const symbols = symbolPacks[activeSubject] || symbolPacks['Maths'];
+                    this.text = symbols[Math.floor(Math.random() * symbols.length)];
+                    this.x = Math.random() * width;
+                    this.y = height + 20; // start below
+                    this.size = Math.floor(Math.random() * 12) + 12; // font size 12px to 24px
+                    this.speedX = (Math.random() * 0.4) - 0.2; // drifting slow left/right
+                    this.speedY = -(Math.random() * 0.5 + 0.2); // rising up slowly
+                    this.opacity = Math.random() * 0.5 + 0.3;
+                    this.color = subjectColors[activeSubject] || '#3b82f6';
+                }
+
+                update() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+
+                    // Mouse interaction - repel slightly
+                    if (mouse.x !== null && mouse.y !== null) {
+                        const dx = this.x - mouse.x;
+                        const dy = this.y - mouse.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        if (distance < 120) {
+                            const force = (120 - distance) / 120;
+                            // Push away
+                            this.x += (dx / distance) * force * 2;
+                            this.y += (dy / distance) * force * 2;
+                        }
+                    }
+
+                    // Reset if drifts off top or sides
+                    if (this.y < -20 || this.x < -40 || this.x > width + 40) {
+                        this.reset();
+                    }
+                }
+
+                draw() {
+                    ctx.save();
+                    ctx.font = `600 ${this.size}px 'Montserrat', sans-serif`;
+                    ctx.fillStyle = this.color;
+                    ctx.globalAlpha = this.opacity;
+                    ctx.shadowColor = this.color;
+                    ctx.shadowBlur = 6;
+                    ctx.fillText(this.text, this.x, this.y);
+                    ctx.restore();
+                }
+            }
+
+            // Track Mouse Coordinates
+            const mouse = { x: null, y: null };
+            const heroSection = document.querySelector('.page-hero');
+            if (heroSection) {
+                heroSection.addEventListener('mousemove', (e) => {
+                    const rect = canvas.getBoundingClientRect();
+                    mouse.x = e.clientX - rect.left;
+                    mouse.y = e.clientY - rect.top;
+                });
+
+                heroSection.addEventListener('mouseleave', () => {
+                    mouse.x = null;
+                    mouse.y = null;
+                });
+            }
+
+            // Initialize Particles
+            function init() {
+                particles = [];
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push(new Particle());
+                }
+            }
+
+            init();
+
+            // Animation Loop
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+                particles.forEach(p => {
+                    p.update();
+                    p.draw();
+                });
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+
+            // Function to change active theme on tab click
+            window.updateCanvasSubject = function (subject) {
+                if (subjectColors[subject]) {
+                    activeSubject = subject;
+                    // Gradually transition colors & symbols of current particles
+                    particles.forEach((p, idx) => {
+                        setTimeout(() => {
+                            p.reset();
+                            // Keep relative positions
+                            p.y = Math.random() * height;
+                            p.x = Math.random() * width;
+                        }, idx * 50); // elegant staggered transition
+                    });
+                }
+            };
+        }
+
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
+            setupTheme();
+            setupHeroCanvas();
             setupTabs();
             setupSearch();
             fetchAllData();
