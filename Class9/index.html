@@ -675,8 +675,28 @@
 
         @media (max-width: 480px) {
             .subject-dashboard {
-                grid-template-columns: 1fr;
-                gap: 0.75rem;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.5rem;
+            }
+            .dashboard-card {
+                padding: 0.75rem;
+                border-radius: 12px;
+            }
+            .dashboard-card .subject-title {
+                font-size: 0.95rem;
+            }
+            .dashboard-card .resources-count {
+                font-size: 0.75rem;
+            }
+            .progress-ring-container {
+                flex-shrink: 0;
+            }
+            .progress-ring {
+                transform: scale(0.8) rotate(-90deg);
+                transform-origin: center;
+            }
+            .subject-icon-overlay {
+                font-size: 0.9rem;
             }
         }
 
@@ -1615,6 +1635,10 @@
             .container {
                 width: 95%;
                 padding: 0 10px;
+            }
+
+            .header-right {
+                gap: 0.75rem;
             }
 
             .logo img {
