@@ -1901,13 +1901,11 @@
 
     <script>
         // Configuration
-        const SHEET_ID = '  ';
-        const CLASS_TABS = ['MathsClass', 'PhysicsClass', 'ChemistryClass', 'BiologyClass'];
-        const ASSIGNMENT_TABS = ['MathsAssignment', 'PhysicsAssignment', 'ChemistryAssignment', 'BiologyAssignment'];
+        const SHEET_ID = '1nCC5lILV2096Wc1ZVGrzYO9mgqhFk-xr4oDdtoBh-v0';
+        const SUBJECT_TABS = ['Maths', 'Physics', 'Chemistry', 'Biology'];
 
         // Data stores
-        let classesData = [];
-        let assignmentsData = [];
+        let allResourcesData = [];
 
         // Subject icons mapping
         const subjectIcons = {
@@ -1924,7 +1922,7 @@
         function fetchSheetDataJSONP(sheetName) {
             return new Promise((resolve, reject) => {
                 const callbackName = `googleSheetCallback_${jsonpCounter++}`;
-                const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json;responseHandler:${callbackName}&sheet=${encodeURIComponent(sheetName)}`;
+                const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json;responseHandler:${callbackName}&headers=1&sheet=${encodeURIComponent(sheetName)}`;
 
                 // Create global callback function
                 window[callbackName] = function (response) {
@@ -1984,40 +1982,50 @@
             return table.rows.map(row => {
                 const item = { subject, sheetName };
                 row.c.forEach((cell, index) => {
-                    const header = headers[index];
-                    if (header) {
-                        // Handle different cell value formats
-                        let value = '';
-                        if (cell) {
-                            if (cell.f) {
-                                value = cell.f; // Formatted value
-                            } else if (cell.v !== null && cell.v !== undefined) {
-                                value = String(cell.v); // Raw value
-                            }
+                    const header = headers[index] || '';
+                    let value = '';
+                    if (cell) {
+                        // Preserve Google Sheets Date(YYYY,M,D) string so parseDate gets accurate year/month/day
+                        if (cell.v !== null && cell.v !== undefined && String(cell.v).startsWith('Date(')) {
+                            value = String(cell.v);
+                        } else if (cell.f) {
+                            value = cell.f; // Formatted value
+                        } else if (cell.v !== null && cell.v !== undefined) {
+                            value = String(cell.v); // Raw value
                         }
+                    }
+
+                    if (header) {
                         item[header] = value;
                     }
+
+                    // Positional fallback mapping (Col 0=Date, 1=Topic, 2=Topic Link, 3=Assignment, 4=Assignment Link)
+                    if (index === 0 && !item['date']) item['date'] = value;
+                    if (index === 1 && !item['topic']) item['topic'] = value;
+                    if (index === 2 && !item['topic link']) item['topic link'] = value;
+                    if (index === 3 && !item['assignment']) item['assignment'] = value;
+                    if (index === 4 && !item['assignment link']) item['assignment link'] = value;
                 });
                 return item;
-            }).filter(item => item.name || item.date || item.link); // Filter empty rows
+            }).filter(item => {
+                // Filter out repeated header rows if any
+                if (item.topic && item.topic.toLowerCase() === 'topic' && item.date && item.date.toLowerCase() === 'date') {
+                    return false;
+                }
+                return item.topic || item.assignment;
+            });
         }
 
         // Fetch all data in parallel
         async function fetchAllData() {
             try {
-                // Fetch classes
-                const classPromises = CLASS_TABS.map(tab => fetchSheetDataJSONP(tab));
-                const classResults = await Promise.all(classPromises);
-                classesData = classResults.flat();
-
-                // Fetch assignments
-                const assignmentPromises = ASSIGNMENT_TABS.map(tab => fetchSheetDataJSONP(tab));
-                const assignmentResults = await Promise.all(assignmentPromises);
-                assignmentsData = assignmentResults.flat();
+                // Fetch all data
+                const promises = SUBJECT_TABS.map(tab => fetchSheetDataJSONP(tab));
+                const results = await Promise.all(promises);
+                allResourcesData = results.flat();
 
                 // Sort by date (newest first)
-                classesData = sortByDate(classesData);
-                assignmentsData = sortByDate(assignmentsData);
+                allResourcesData = sortByDate(allResourcesData);
 
                 // Update progress indicators
                 updateProgressIndicators();
@@ -2037,9 +2045,12 @@
             const circumference = 138.2; // 2 * PI * 22
 
             subjects.forEach(subject => {
-                const classCount = classesData.filter(item => item.subject === subject).length;
-                const assignmentCount = assignmentsData.filter(item => item.subject === subject).length;
-                const total = classCount + assignmentCount;
+                const subjectData = allResourcesData.filter(item => item.subject === subject);
+                let total = 0;
+                subjectData.forEach(item => {
+                    if (item.topic) total++;
+                    if (item.assignment) total++;
+                });
 
                 // Update text
                 const textEl = document.getElementById(`progress-${subject.toLowerCase()}-text`);
@@ -2067,20 +2078,27 @@
         // Parse date string to Date object
         function parseDate(dateStr) {
             if (!dateStr) return new Date(0);
+            dateStr = String(dateStr).trim();
 
-            // Handle Google Sheets Date() format: Date(2025,11,13)
+            // Handle Google Sheets Date() format: Date(2026,3,17) (Month is 0-indexed in Sheets Date constructor)
             const googleDateMatch = dateStr.match(/Date\((\d+),(\d+),(\d+)\)/);
             if (googleDateMatch) {
                 return new Date(
-                    parseInt(googleDateMatch[1]),
-                    parseInt(googleDateMatch[2]),
-                    parseInt(googleDateMatch[3])
+                    parseInt(googleDateMatch[1], 10),
+                    parseInt(googleDateMatch[2], 10),
+                    parseInt(googleDateMatch[3], 10)
                 );
             }
 
-            // Try standard formats
+            // Try standard format with 4-digit year
             const date = new Date(dateStr);
-            if (!isNaN(date.getTime())) return date;
+            if (!isNaN(date.getTime()) && /\d{4}/.test(dateStr)) return date;
+
+            // Date string without year (e.g. '10 April', '3 May') - use current year
+            if (!/\d{4}/.test(dateStr)) {
+                const withYear = new Date(dateStr + ' ' + new Date().getFullYear());
+                if (!isNaN(withYear.getTime())) return withYear;
+            }
 
             // Try DD/MM/YYYY format
             const parts = dateStr.split(/[\/\-\.]/);
@@ -2091,7 +2109,7 @@
                 return new Date(year, month, day);
             }
 
-            return new Date(0);
+            return !isNaN(date.getTime()) ? date : new Date(0);
         }
 
         // Format date for display
@@ -2107,7 +2125,10 @@
         function getDateKey(dateStr) {
             const date = parseDate(dateStr);
             if (date.getTime() === 0) return dateStr || 'no-date';
-            return date.toISOString().split('T')[0];
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
         }
 
         // Check if item is recent (within 48 hours)
@@ -2130,44 +2151,31 @@
         // Current search term
         let currentSearchTerm = '';
 
-        // Render timeline resources
+        // Render resources vertical timeline
         function renderResourcesTable(subject, searchTerm = '') {
             const container = document.getElementById('resources-container');
             currentSearchTerm = searchTerm.toLowerCase().trim();
 
             // Filter data by subject
-            let filteredClasses = classesData.filter(item => item.subject === subject);
-            let filteredAssignments = assignmentsData.filter(item => item.subject === subject);
+            let filteredData = allResourcesData.filter(item => item.subject === subject);
 
             // Apply search filter if present
             if (currentSearchTerm) {
-                filteredClasses = filteredClasses.filter(item =>
-                    (item.name || '').toLowerCase().includes(currentSearchTerm)
-                );
-                filteredAssignments = filteredAssignments.filter(item =>
-                    (item.name || '').toLowerCase().includes(currentSearchTerm)
+                filteredData = filteredData.filter(item =>
+                    (item.topic || '').toLowerCase().includes(currentSearchTerm) ||
+                    (item.assignment || '').toLowerCase().includes(currentSearchTerm)
                 );
             }
 
             // Group by date
             const dateMap = new Map();
 
-            // Add classes
-            filteredClasses.forEach(item => {
+            filteredData.forEach(item => {
                 const dateKey = getDateKey(item.date);
                 if (!dateMap.has(dateKey)) {
-                    dateMap.set(dateKey, { date: item.date, classes: [], assignments: [] });
+                    dateMap.set(dateKey, { date: item.date, items: [] });
                 }
-                dateMap.get(dateKey).classes.push(item);
-            });
-
-            // Add assignments
-            filteredAssignments.forEach(item => {
-                const dateKey = getDateKey(item.date);
-                if (!dateMap.has(dateKey)) {
-                    dateMap.set(dateKey, { date: item.date, classes: [], assignments: [] });
-                }
-                dateMap.get(dateKey).assignments.push(item);
+                dateMap.get(dateKey).items.push(item);
             });
 
             // Convert to array and sort by date (newest first)
@@ -2199,6 +2207,10 @@
                 const dateString = formatDate(dayData.date);
                 const animDelay = `${index * 0.1}s`;
 
+                // Collect all topics (class notes) and assignments for this date
+                const topics = dayData.items.filter(item => item.topic);
+                const assignments = dayData.items.filter(item => item.assignment);
+
                 html += `
                     <div class="timeline-item" style="animation-delay: ${animDelay};">
                         <div class="timeline-node"></div>
@@ -2214,15 +2226,16 @@
                                 <div class="timeline-resource-content">
                 `;
 
-                if (dayData.classes.length > 0) {
-                    dayData.classes.forEach(classItem => {
+                if (topics.length > 0) {
+                    topics.forEach(item => {
+                        const noteLink = item['topic link'] || item['notes link'] || item['link'];
                         html += `
                             <div class="timeline-resource-title">
-                                ${escapeHtml(classItem.name) || 'Untitled Notes'}
-                                ${getNewBadge(classItem.date)}
+                                ${escapeHtml(item.topic) || 'Untitled Notes'}
+                                ${getNewBadge(item.date)}
                             </div>
-                            <a href="${formatUrl(classItem.link)}" target="_blank" rel="noopener noreferrer" 
-                               class="resource-link ${!classItem.link ? 'disabled' : ''}">
+                            <a href="${formatUrl(noteLink)}" target="_blank" rel="noopener noreferrer" 
+                               class="resource-link ${!noteLink ? 'disabled' : ''}">
                                 <i class="fas fa-file-alt"></i> View Notes
                             </a>
                         `;
@@ -2247,15 +2260,16 @@
                                 <div class="timeline-resource-content">
                 `;
 
-                if (dayData.assignments.length > 0) {
-                    dayData.assignments.forEach(assignmentItem => {
+                if (assignments.length > 0) {
+                    assignments.forEach(item => {
+                        const assignmentLink = item['assignment link'] || item['link'];
                         html += `
                             <div class="timeline-resource-title">
-                                ${escapeHtml(assignmentItem.name) || 'Untitled Assignment'}
-                                ${getNewBadge(assignmentItem.date)}
+                                ${escapeHtml(item.assignment) || 'Untitled Assignment'}
+                                ${getNewBadge(item.date)}
                             </div>
-                            <a href="${formatUrl(assignmentItem.link)}" target="_blank" rel="noopener noreferrer" 
-                               class="resource-link ${!assignmentItem.link ? 'disabled' : ''}">
+                            <a href="${formatUrl(assignmentLink)}" target="_blank" rel="noopener noreferrer" 
+                               class="resource-link ${!assignmentLink ? 'disabled' : ''}">
                                 <i class="fas fa-external-link-alt"></i> View Assignment
                             </a>
                         `;
